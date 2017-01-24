@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: wildfly-swarm-configmap
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: wildfly-swarm-configmap
