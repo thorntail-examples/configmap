@@ -19,6 +19,7 @@ package org.obsidiantoaster.quickstart.service;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -28,6 +29,7 @@ import javax.ws.rs.QueryParam;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 @Path("/")
+@ApplicationScoped
 public class GreetingController {
 
     private static final AtomicLong counter = new AtomicLong();

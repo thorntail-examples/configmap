@@ -80,6 +80,11 @@
 
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
+      <artifactId>cdi</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
       <artifactId>cdi-config</artifactId>
     </dependency>
 
@@ -163,17 +168,19 @@
     </profile>
   </profiles>
 
-  <scm>
-    <!--
-    <connection>scm:git:git://github.com/obsidian-toaster/quick_rest_wildfly-swarm.git</connection>
-    <developerConnection>scm:git:git@github.com:obsidian-toaster/.git</developerConnection>
-    <url>http://github.com/obsidian-toaster/quick_rest_wildfly-swarm</url>
-    <tag>HEAD</tag>
-    -->
+  <!--<scm>
+    &lt;!&ndash;
+    <scm>
+        <connection>scm:git:git@github.com:obsidian-toaster-quickstarts/rest_configmap_swarm.git</connection>
+        <developerConnection>scm:git:git@github.com:obsidian-toaster-quickstarts/rest_configmap_swarm.git</developerConnection>
+        <url>https://github.com/obsidian-toaster-quickstarts/rest_configmap_swarm</url>
+        <tag>HEAD</tag>
+      </scm>
+    &ndash;&gt;
     <connection>${obs.scm.git.connection}</connection>
     <developerConnection>${obs.scm.dev.connection}</developerConnection>
     <url>${obs.scm.url}</url>
     <tag>${obs.scm.tag}</tag>
-  </scm>
+  </scm>-->
 
 </project>
