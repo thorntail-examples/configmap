@@ -1,12 +1,13 @@
 # Introduction
 
-This project demonstrates how to use Openshift configmap as means to configure a Wildfly Swarm service.
+This project demonstrates how to use an [Openshift configmap](https://docs.openshift.org/latest/dev_guide/configmaps.html) as means to configure a Wildfly Swarm service.
 The two main attributes that we are going to configure are:
 
  * the log level for the service
  * a greeting value used to configure the application level.
 
-The service log level can be verified using the Openshift management console. The application level configuration on the other hand, will be returned from a REST endpoint.
+The service log level can be verified using the Openshift management console (See Application > Pods > Logs).
+The application level configuration on the other hand, will be returned from a REST endpoint.
 
 NOTE: When running the service locally, you won't be able to access the greeting due to the lack of a configmap, and the service returns `n/a`. When running on Openshift however, with a configmap provided, the value of the configmap key `service.greeting` will be returned.
 
@@ -82,7 +83,7 @@ mvn clean install
     ```
     oc get route/wildfly-swarm-configmap
     NAME              HOST/PORT                                          PATH      SERVICE                TERMINATION   LABELS
-    wildfly-swarm-rest   <HOST_PORT_ADDRESS>             wildfly-swarm-rest:8080
+    wildfly-swarm-configmap   <HOST_PORT_ADDRESS>             wildfly-swarm-configmap:8080
     ```
 
 1. Use the Host or Port address to access the REST endpoint.
@@ -90,7 +91,8 @@ mvn clean install
     http http://<HOST_PORT_ADDRESS>/greeting    
     ```
 
-    Here the response from the Rest endpoint shoulld contain the greeting defined in the `src/main/fabric8/configmap.yml`:
+    Here the response from the Rest endpoint should
+    contain the greeting defined in the `src/main/fabric8/configmap.yml`:
 
     ```
     {
@@ -101,7 +103,7 @@ mvn clean install
 
 # Local Openshift Cluster
 
- Alterntively to the openshift online approach, you might run an [openshift cluster locally](https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md)
+ Alternatively to the openshift online approach, you might run an [openshift cluster locally](https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md)
 
  ```
  oc cluster up --version=v1.4.0-rc1
