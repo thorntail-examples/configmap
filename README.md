@@ -1,11 +1,14 @@
 # Introduction
 
-This project demonstrates how to use Openshift configmap as means to configure a Wildfly Swarn service.
-The two main attribute that we are going to configure are the log level of service an arbitrary value, used to configure the application level.
+This project demonstrates how to use Openshift configmap as means to configure a Wildfly Swarm service.
+The two main attributes that we are going to configure are:
+
+ * the log level for the service
+ * a greeting value used to configure the application level.
 
 The service log level can be verified using the Openshift management console. The application level configuration on the other hand, will be returned from a REST endpoint.
 
-When running the service locally, you won't be able to access the greeting due to the lack of a configmap, and the service returns `n/a`. When running on Openshift however, with a configmap provided, the value of the configmap key `service.greeting` will be returned.
+NOTE: When running the service locally, you won't be able to access the greeting due to the lack of a configmap, and the service returns `n/a`. When running on Openshift however, with a configmap provided, the value of the configmap key `service.greeting` will be returned.
 
 You can perform this task in three different ways:
 
