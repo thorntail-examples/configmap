@@ -56,7 +56,8 @@ mvn clean install
     curl http://localhost:8080/greeting
     ```
 
-  It should return the value of configuration attribute `service.greeting`
+  It should return the value `Hello n/a`, because no greeting value was supplied due to the lack of a configmap.
+  But in the next step, running on openshift, we'll supply a configmap with a `service.greeting` property.
 
 # OpenShift Online
 
@@ -84,6 +85,15 @@ mvn clean install
 1. Use the Host or Port address to access the REST endpoint.
     ```
     http http://<HOST_PORT_ADDRESS>/greeting    
+    ```
+
+    Here the response from the Rest endpoint shoulld contain the greeting defined in the `src/main/fabric8/configmap.yml`:
+
+    ```
+    {
+      "id":1,
+      "content":"Hello From ConfigMap"
+    }
     ```
 
 # Local Openshift Cluster
