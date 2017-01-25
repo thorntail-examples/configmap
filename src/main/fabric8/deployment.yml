@@ -8,3 +8,15 @@ spec:
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 5
+        - volumeMounts:
+            - name: config
+              mountPath: /app/config
+      volumes:
+        - configMap:
+            name: ${project.artifactId}
+            items:
+            - key: "project-stages.yml"
+              path: "project-stages.yml"
+          name: config
+
+
