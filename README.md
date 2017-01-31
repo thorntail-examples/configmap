@@ -72,6 +72,12 @@ mvn clean install
     ```
     oc login https://api.dev-preview-int.openshift.com --token=MYTOKEN
     ```
+1. To allow the WildFly Swarm application running as a pod to access the Kubernetes Api to retrieve the Config Map associated to the application name of the project `swarm-rest-configmap`, 
+   the view role must be assigned to the default service account in the current project:
+
+    ```
+    oc policy add-role-to-user view system:serviceaccount:$(oc project -q):default -n $(oc project -q)
+    ```      
 1. Use the Fabric8 Maven Plugin to launch the S2I process on the OpenShift Online machine & start the pod.
 
     ```
