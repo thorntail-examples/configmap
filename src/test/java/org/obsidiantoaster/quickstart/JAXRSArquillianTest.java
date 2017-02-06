@@ -47,7 +47,7 @@ public class JAXRSArquillianTest {
 
         Response response = target.request(MediaType.APPLICATION_JSON).get();
         Assert.assertEquals(200, response.getStatus());
-        Assert.assertTrue(response.readEntity(String.class).contains("Hello n/a"));
+        Assert.assertTrue(response.readEntity(String.class).contains("Hello, World!"));
     }
 
 }

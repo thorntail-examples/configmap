@@ -2,8 +2,7 @@ metadata:
   name: ${project.artifactId}
 data:
   project-stages.yml: |-
-    service:
-      greeting: From ConfigMap
+    message: Hello, %s from Kubernetes ConfigMap !
     swarm:
       logging:
         root-logger:
