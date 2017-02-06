@@ -35,14 +35,17 @@ public class GreetingController {
     private static final AtomicLong counter = new AtomicLong();
 
     @Inject
-    @ConfigurationValue("service.greeting")
-    Optional<String> greetingValue;
+    @ConfigurationValue("message")
+    Optional<String> message;
 
     @GET
     @Path("/greeting")
     @Produces("application/json")
-    public Greeting greeting() {
-        String suffix = greetingValue.isPresent() ? greetingValue.get(): "n/a";
-        return new Greeting(counter.incrementAndGet(), "Hello "+suffix);
+    public Greeting greeting(@QueryParam(value="name") String name) {
+        if (name == null) {
+            name = "World";
+        }
+        String template = message.orElse("Hello, %s!");
+        return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 }

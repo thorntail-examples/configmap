@@ -4,12 +4,13 @@ This project demonstrates how to use an [Openshift configmap](https://docs.opens
 The two main attributes that we are going to configure are:
 
  * the log level for the service
- * a greeting value used to configure the application level.
+ * a greeting template used to configure the application.
 
 The service log level can be verified using the Openshift management console (See Application > Pods > Logs).
 The application level configuration on the other hand, will be returned from a REST endpoint.
 
-NOTE: When running the service locally, you won't be able to access the greeting due to the lack of a configmap, and the service returns `n/a`. When running on Openshift however, with a configmap provided, the value of the configmap key `service.greeting` will be returned.
+NOTE: When running the service locally, it will use a default greeting template. When running on Openshift however,
+with a configmap provided, the value of the configmap key `message` will be used as the greeting template.
 
 You can perform this task in three different ways:
 
@@ -60,8 +61,8 @@ mvn clean install
     curl http://localhost:8080/greeting
     ```
 
-  It should return the value `Hello n/a`, because no greeting value was supplied due to the lack of a configmap.
-  But in the next step, running on openshift, we'll supply a configmap with a `service.greeting` property.
+  It should return the value `Hello, World!`, which uses the default greeting template due to the lack of a configmap.
+  But in the next step, running on openshift, we'll supply a configmap with a `message` property.
 
 # OpenShift Online
 
@@ -97,12 +98,12 @@ mvn clean install
     http http://<HOST_PORT_ADDRESS>/greeting    
     ```
 
-    Here the response from the Rest endpoint should
-    contain the greeting defined in the `src/main/fabric8/configmap.yml`:
+    Here the response from the REST endpoint should use the greeting template
+    defined in the `src/main/fabric8/configmap.yml`:
 
     ```
     {
       "id":1,
-      "content":"Hello From ConfigMap"
+      "content":"Hello, World from Kubernetes ConfigMap !"
     }
     ```
