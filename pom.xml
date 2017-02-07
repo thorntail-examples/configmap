@@ -38,7 +38,7 @@
     <java.version>1.8</java.version>
 
     <fabric8.version>2.2.176</fabric8.version>
-    <version.wildfly.swarm>2017.1.1</version.wildfly.swarm>
+    <version.wildfly.swarm>2017.2.0</version.wildfly.swarm>
 
     <fabric8.maven.plugin.version>3.1.92</fabric8.maven.plugin.version>
     <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
