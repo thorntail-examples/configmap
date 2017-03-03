@@ -1,0 +1,2 @@
+name: WildFly Swarm - Config Map
+description:  A quickstart that demonstrates how to use an Openshift configmap to configure a Swarm service  
