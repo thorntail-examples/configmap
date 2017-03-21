@@ -16,33 +16,27 @@
  */
 package org.obsidiantoaster.quickstart.configmap;
 
-import java.util.UUID;
-
 public class Greeting {
 
     private final long id;
-    private final String content;
-    private final static String node = UUID.randomUUID().toString();
+    private final String message;
 
     public Greeting() {
         this.id = 0;
-        this.content = null;
+        this.message = null;
     }
 
     public Greeting(long id, String content) {
         this.id = id;
-        this.content = content;
+        this.message = content;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getContent() {
-        return content;
+    public String getMessage() {
+        return message;
     }
 
-    public String getNode() {
-        return node;
-    }
 }

@@ -24,11 +24,13 @@ public class GreetingServiceTest {
     @RunAsClient
     public void testResource() {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target("http://localhost:8080").path("greeting");
+        WebTarget target = client.target("http://localhost:8080")
+                .path("api")
+                .path("greeting");
 
         Response response = target.request(MediaType.APPLICATION_JSON).get();
         Assert.assertEquals(200, response.getStatus());
-        Assert.assertTrue(response.readEntity(String.class).contains("Hello, World!"));
+        Assert.assertTrue(response.readEntity(String.class).contains("Hello Test!"));
     }
 
 }

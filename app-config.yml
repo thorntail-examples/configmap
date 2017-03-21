@@ -1,0 +1,4 @@
+greeting:
+  message: Hello World!
+swarm:
+  logging: INFO
