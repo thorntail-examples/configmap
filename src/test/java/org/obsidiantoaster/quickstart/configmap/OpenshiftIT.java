@@ -76,7 +76,7 @@ public class OpenshiftIT {
     }
 
     @Test
-    @Ignore       // [hb] TODO: this currently doesn;t work relaibly, hence we skip the test for now
+
     public void test_B_MissingConfigurationSource() {
 
         openshift.deploy(CONFIGMAP_NAME, new File("target/test-classes/test-config-broken.yml"));
