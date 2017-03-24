@@ -12,7 +12,6 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -30,7 +29,7 @@ public class OpenshiftIT {
 
     private static final String APPLICATION_NAME = System.getProperty("app.name");
 
-    private static final OpenShiftTestAssistant openshift = new OpenShiftTestAssistant(APPLICATION_NAME);
+    private static final OpenshiftTestAssistant openshift = new OpenshiftTestAssistant(APPLICATION_NAME);
 
     private static final String CONFIGMAP_NAME = "app-config";
 

@@ -27,7 +27,7 @@ import io.restassured.RestAssured;
  * @author <a href="http://escoffier.me">Clement Escoffier</a>
  * @author <a href="mailto:gytis@redhat.com">Gytis Trikleris</a>
  */
-public class OpenShiftTestAssistant {
+public class OpenshiftTestAssistant {
 
 
 	private final OpenShiftClient client;
@@ -41,11 +41,11 @@ public class OpenShiftTestAssistant {
 
 	private String baseUrl;
 
-	public OpenShiftTestAssistant(String applicationName) {
+	public OpenshiftTestAssistant(String applicationName) {
 		this(applicationName, "target/classes/META-INF/fabric8/openshift.yml");
 	}
 
-	public OpenShiftTestAssistant(String applicationName, String configurationPath) {
+	public OpenshiftTestAssistant(String applicationName, String configurationPath) {
 		this.applicationName = applicationName;
 		this.configurationPath = configurationPath;
 		this.client = new DefaultKubernetesClient().adapt(OpenShiftClient.class);
