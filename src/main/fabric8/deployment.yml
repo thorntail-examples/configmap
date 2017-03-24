@@ -4,9 +4,10 @@ spec:
       containers:
         - readinessProbe:
             httpGet:
-              path: /health
+              path: /api/ping
               port: 8080
             initialDelaySeconds: 10
+            failureThreshold: 3
             periodSeconds: 5
           volumeMounts:
             - name: config
@@ -16,9 +17,9 @@ spec:
               value: "-Dswarm.project.stage.file=file:///app/config/project-stages.yml"
       volumes:
         - configMap:
-            name: ${project.artifactId}
+            name: app-config
             items:
-            - key: "project-stages.yml"
+            - key: "app-config.yml"
               path: "project-stages.yml"
           name: config
 
