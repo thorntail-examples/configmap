@@ -1,0 +1,2 @@
+name: Configmaps - Wildfly Swarm
+description: Demonstrates application configguration using Openshift Configmaps in Wildfly Swarm
