@@ -81,6 +81,8 @@ public class OpenshiftIT {
         openshift.deploy(CONFIGMAP_NAME, new File("target/test-classes/test-config-broken.yml"));
         openshift.rolloutChanges(APPLICATION_NAME);
 
+        openshift.awaitApplicationReadinessOrFail();
+
         expect().
                 statusCode(500).
                 when().
