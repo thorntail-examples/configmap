@@ -1,4 +1,4 @@
-package org.obsidiantoaster.quickstart.configmap;
+package io.openshift.boosters.configmap;
 
 import java.io.File;
 import java.util.List;

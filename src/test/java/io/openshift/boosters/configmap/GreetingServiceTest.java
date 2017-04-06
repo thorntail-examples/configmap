@@ -1,4 +1,4 @@
-package org.obsidiantoaster.quickstart.configmap;
+package io.openshift.boosters.configmap;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
