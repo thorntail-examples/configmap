@@ -18,18 +18,25 @@ package io.openshift.boosters.configmap;
 
 public class Greeting {
 
-    private final String content;
+    private final long id;
+    private final String message;
 
     public Greeting() {
-        this.content = null;
+        this.id = 0;
+        this.message = null;
     }
 
-    public Greeting(String content) {
-        this.content = content;
+    public Greeting(long id, String content) {
+        this.id = id;
+        this.message = content;
     }
 
-    public String getContent() {
-        return content;
+    public long getId() {
+        return id;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
 }
