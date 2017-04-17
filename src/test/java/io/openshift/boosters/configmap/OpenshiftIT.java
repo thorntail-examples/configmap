@@ -1,23 +1,31 @@
 package io.openshift.boosters.configmap;
 
-import java.io.File;
-import java.util.List;
-import java.util.Optional;
-
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.response.Response;
 import io.fabric8.kubernetes.api.model.ConfigMap;
 import io.fabric8.openshift.client.OpenShiftClient;
+import io.openshift.booster.test.OpenShiftTestAssistant;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-import static io.restassured.RestAssured.expect;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
+import static com.jayway.awaitility.Awaitility.await;
+import static com.jayway.restassured.RestAssured.get;
+import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Heiko Braun
@@ -27,19 +35,12 @@ import static org.hamcrest.Matchers.containsString;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OpenshiftIT {
 
-    private static final String APPLICATION_NAME = System.getProperty("app.name");
-
-    private static final OpenshiftTestAssistant openshift = new OpenshiftTestAssistant(APPLICATION_NAME);
+    private static final OpenShiftTestAssistant openshift = new OpenShiftTestAssistant();
 
     private static final String CONFIGMAP_NAME = "app-config";
 
-    private static String API_ENDPOINT;
-
     @BeforeClass
     public static void setup() throws Exception {
-
-        Assert.assertNotNull(APPLICATION_NAME);
-
         // pre-requisite for swarm
         openshift.deploy(CONFIGMAP_NAME, new File("target/test-classes/test-config.yml"));
 
@@ -49,7 +50,16 @@ public class OpenshiftIT {
         // wait until the pods & routes become available
         openshift.awaitApplicationReadinessOrFail();
 
-        API_ENDPOINT = openshift.getBaseUrl() + "/api/greeting";
+        await().atMost(5, TimeUnit.MINUTES).until(() -> {
+            try {
+                Response response = get();
+                return response.getStatusCode() == 200;
+            } catch (Exception e) {
+                return false;
+            }
+        });
+
+        RestAssured.baseURI = RestAssured.baseURI + "/api/greeting";
     }
 
     @AfterClass
@@ -58,40 +68,55 @@ public class OpenshiftIT {
     }
 
     @Test
-    public void test_A_ConfigMapExists() throws Exception {
-
+    public void test1ConfigMapExists() throws Exception {
         Optional<ConfigMap> configMap = findConfigMap();
-        Assert.assertTrue(configMap.isPresent());
+        assertTrue(configMap.isPresent());
     }
 
     @Test
-    public void test_B_ConfigSourcePresent() {
-
-        expect().
-            statusCode(200).
-            body(containsString("Hello World!")).
-        when().
-            get(API_ENDPOINT);
+    public void test2ServiceInvocation() {
+        when()
+                .get()
+        .then()
+                .statusCode(200)
+                .body(containsString("Hello World from a ConfigMap!"));
     }
 
     @Test
+    public void test3ServiceInvocationWithParam() {
+        given()
+                .queryParam("name", "Peter")
+        .when()
+                .get()
+        .then()
+                .statusCode(200)
+                .body(containsString("Hello Peter from a ConfigMap!"));
+    }
 
-    public void test_B_MissingConfigurationSource() {
-
+    @Test
+    public void test4MissingEntryInConfigMap() throws IOException {
         openshift.deploy(CONFIGMAP_NAME, new File("target/test-classes/test-config-broken.yml"));
-        openshift.rolloutChanges(APPLICATION_NAME);
+        // TODO rolloutChanges();
 
-        openshift.awaitApplicationReadinessOrFail();
+        when()
+                .get()
+        .then()
+                .statusCode(500);
+    }
 
-        expect().
-                statusCode(500).
-                when().
-                get(API_ENDPOINT);
+    @Test
+    public void test5MissingConfigMap() throws IOException {
+        openshift.client().configMaps().withName(CONFIGMAP_NAME).delete();
+        // TODO rolloutChanges();
+
+        when()
+                .get()
+        .then()
+                .statusCode(500);
     }
 
     private Optional<ConfigMap> findConfigMap() {
-
-        OpenShiftClient client = openshift.getClient();
+        OpenShiftClient client = openshift.client();
 
         List<ConfigMap> cfm = client.configMaps()
                 .inNamespace(client.getNamespace())

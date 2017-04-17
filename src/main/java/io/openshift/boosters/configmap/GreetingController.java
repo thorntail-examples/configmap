@@ -24,6 +24,7 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
@@ -32,8 +33,6 @@ import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 @ApplicationScoped
 public class GreetingController {
 
-    private static final AtomicLong counter = new AtomicLong();
-
     @Inject
     @ConfigurationValue("greeting.message")
     Optional<String> message;
@@ -41,15 +40,15 @@ public class GreetingController {
     @GET
     @Path("/greeting")
     @Produces("application/json")
-    public Response greeting() {
-
-        if(!message.isPresent()) {
+    public Response greeting(@QueryParam("name") String name) {
+        if (!message.isPresent()) {
             return Response.status(500).build();
-        } else {
-            return Response.ok()
-                    .entity(new Greeting(counter.incrementAndGet(), message.get()))
-                    .build();
         }
+
+        String template = message.get();
+        Greeting greeting = new Greeting(String.format(template, name != null ? name : "World"));
+
+        return Response.ok().entity(greeting).build();
     }
 
     @GET

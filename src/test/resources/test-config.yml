@@ -5,6 +5,6 @@ metadata:
 data:
   app-config.yml: |-
     greeting:
-      message: Hello World!
+      message: Hello %s from a ConfigMap!
     swarm:
       logging: INFO

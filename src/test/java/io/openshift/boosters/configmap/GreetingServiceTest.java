@@ -22,15 +22,27 @@ public class GreetingServiceTest {
 
     @Test
     @RunAsClient
-    public void testResource() {
+    public void test_service_invocation() {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://localhost:8080")
-                .path("api")
-                .path("greeting");
+                .path("api").path("greeting");
 
         Response response = target.request(MediaType.APPLICATION_JSON).get();
         Assert.assertEquals(200, response.getStatus());
-        Assert.assertTrue(response.readEntity(String.class).contains("Hello Test!"));
+        Assert.assertTrue(response.readEntity(String.class).contains("Hello World!"));
+    }
+
+    @Test
+    @RunAsClient
+    public void test_service_invocation_withParam() {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8080")
+                .path("api").path("greeting")
+                .queryParam("name", "Peter");
+
+        Response response = target.request(MediaType.APPLICATION_JSON).get();
+        Assert.assertEquals(200, response.getStatus());
+        Assert.assertTrue(response.readEntity(String.class).contains("Hello Peter!"));
     }
 
 }
