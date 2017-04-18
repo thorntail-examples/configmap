@@ -1,17 +1,69 @@
 <html>
+
+<head>
+
+  <meta charset="utf-8">
+  <title>Vert.x HTTP + ConfigMap Booster</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+
 <body>
 
-<h1>User Problem</h1>
+<div class="container">
 
-A developer would like to configure an application or the application runtime deployed to Openshift.
+  <div>
+    <h1>WildFly Swarm HTTP + ConfigMap Booster</h1>
+    <p class="lead">This mission showcases application configuration, using OpenShift <em>configmaps</em>. It
+      demonstrates application and runtime configuration leveraging external configuration sources. Alongside
+      the basic means to set up a <em>configmap</em> and use with a specific runtime, this booster also
+      demonstrates how changes to the configuration can be applied to services already deployed in OpenShift.
+    </p>
 
-<h1>Description</h1>
+    <h2>Using the greeting service</h2>
 
-This project demonstrates application and runtime configuration leveraging external configuration sources. Alongside the basic means to set up a configmap and use with a specific runtime, this quickstart also demonstrates how changes to the configuration can be applied to services already deployed to openshift.
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="World">
+      </div>
+      <button id="invoke" type="submit" class="btn btn-success">Invoke</button>
+    </form>
 
-<h1>Resources Available</h1>
-<ul>
-  <li><a href="/api/greeting">Greeting API</a>
-</ul>
+    <h3>Result:</h3>
+    <pre><code id="greeting-result">Invoke the service to see the result.</code></pre>
+
+    <p class="lead">
+      Once you have invoked the <em>greeting</em> service, you can reconfigure it:
+    </p>
+    <ol>
+      <li>Run <code>oc edit configmap app-config</code></li>
+      <li>Change the <code>message</code> entry to <code>Bonjour %s from a ConfigMap!</code></li>
+      <li>Save</li>
+      <li>Run <code>oc rollout latest dc/{projectName}</code></li>
+    </ol>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function() {
+       $("#invoke").click(function(e) {
+          var n = $("#name").val() || "World";
+          $.getJSON("/api/greeting?name=" + n, function(res) {
+              $("#greeting-result").html(JSON.stringify(res));
+          });
+          e.preventDefault();
+       });
+    });
+</script>
+
 </body>
+
 </html>
