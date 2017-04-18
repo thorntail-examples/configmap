@@ -1,4 +1,4 @@
-package io.openshift.boosters.configmap;
+package io.openshift.boosters;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

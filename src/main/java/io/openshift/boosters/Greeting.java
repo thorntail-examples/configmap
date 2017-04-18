@@ -14,29 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.openshift.boosters.configmap;
+package io.openshift.boosters;
 
 public class Greeting {
 
-    private final long id;
-    private final String message;
+    private final String content;
 
     public Greeting() {
-        this.id = 0;
-        this.message = null;
+        this.content = null;
     }
 
-    public Greeting(long id, String content) {
-        this.id = id;
-        this.message = content;
+    public Greeting(String content) {
+        this.content = content;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public String getMessage() {
-        return message;
+    public String getContent() {
+        return content;
     }
 
 }

@@ -1,4 +1,4 @@
-package io.openshift.boosters.configmap;
+package io.openshift.boosters;
 
 import java.io.File;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import io.fabric8.kubernetes.api.model.ConfigMap;
 import io.fabric8.openshift.client.OpenShiftClient;
+import io.openshift.booster.test.OpenShiftTestAssistant;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.AfterClass;
@@ -27,9 +28,7 @@ import static org.hamcrest.Matchers.containsString;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OpenshiftIT {
 
-    private static final String APPLICATION_NAME = System.getProperty("app.name");
-
-    private static final OpenshiftTestAssistant openshift = new OpenshiftTestAssistant(APPLICATION_NAME);
+    private static final OpenShiftTestAssistant openshift = new OpenShiftTestAssistant();
 
     private static final String CONFIGMAP_NAME = "app-config";
 
@@ -37,9 +36,6 @@ public class OpenshiftIT {
 
     @BeforeClass
     public static void setup() throws Exception {
-
-        Assert.assertNotNull(APPLICATION_NAME);
-
         // pre-requisite for swarm
         openshift.deploy(CONFIGMAP_NAME, new File("target/test-classes/test-config.yml"));
 

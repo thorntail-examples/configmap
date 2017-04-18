@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,44 +14,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.openshift.boosters.configmap;
+package io.openshift.boosters;
 
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 @Path("/")
 @ApplicationScoped
-public class GreetingController {
-
-    private static final AtomicLong counter = new AtomicLong();
+public class GreetingEndpoint {
 
     @Inject
     @ConfigurationValue("greeting.message")
-    Optional<String> message;
+    private Optional<String> message;
 
     @GET
     @Path("/greeting")
     @Produces("application/json")
-    public Response greeting() {
+    public Response greeting(@QueryParam("name") String name) {
+        String suffix = name != null ? name : "World";
 
-        if(!message.isPresent()) {
-            return Response.status(500).build();
-        } else {
-            return Response.ok()
-                    .entity(new Greeting(counter.incrementAndGet(), message.get()))
-                    .build();
-        }
+        return message
+                .map(s -> Response.ok().entity(new Greeting(String.format(s, suffix))).build())
+                .orElseGet(() -> Response.status(500).entity("ConfigMap not present").build());
+
     }
 
+    // Purely for OpenShift Readiness check
     @GET
     @Path("/ping")
     @Produces("text/plain")

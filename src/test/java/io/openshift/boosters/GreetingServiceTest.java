@@ -1,4 +1,4 @@
-package io.openshift.boosters.configmap;
+package io.openshift.boosters;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
