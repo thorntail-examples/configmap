@@ -27,7 +27,7 @@
 
   <groupId>io.openshift.boosters</groupId>
   <artifactId>wildfly-swarm-configmap</artifactId>
-  <version>2-SNAPSHOT</version>
+  <version>2</version>
   <packaging>war</packaging>
 
   <name>Config Map Example</name>
