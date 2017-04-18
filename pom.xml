@@ -102,12 +102,6 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <arguments>
-            <argument>-s</argument>
-            <argument>src/test/resources/project-defaults.yml</argument>
-          </arguments>
-        </configuration>
       </plugin>
 
       <plugin>

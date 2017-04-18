@@ -1,2 +1,2 @@
 greeting:
-  message: Hello Test!
+  message: Hello %s from a ConfigMap!
