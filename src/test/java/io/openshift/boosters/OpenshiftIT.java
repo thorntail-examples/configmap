@@ -3,28 +3,29 @@ package io.openshift.boosters;
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.response.Response;
 import io.fabric8.kubernetes.api.model.ConfigMap;
 import io.fabric8.openshift.client.OpenShiftClient;
 import io.openshift.booster.test.OpenShiftTestAssistant;
-import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.junit.Arquillian;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-import static io.restassured.RestAssured.expect;
+import static com.jayway.awaitility.Awaitility.await;
+import static com.jayway.restassured.RestAssured.get;
+import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Heiko Braun
  */
-@RunWith(Arquillian.class)
-@RunAsClient
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OpenshiftIT {
 
@@ -32,7 +33,7 @@ public class OpenshiftIT {
 
     private static final String CONFIGMAP_NAME = "app-config";
 
-    private static String API_ENDPOINT;
+    private static String originalBaseUri;
 
     @BeforeClass
     public static void setup() throws Exception {
@@ -45,49 +46,78 @@ public class OpenshiftIT {
         // wait until the pods & routes become available
         openshift.awaitApplicationReadinessOrFail();
 
-        API_ENDPOINT = openshift.getBaseUrl() + "/api/greeting";
+        await().atMost(5, TimeUnit.MINUTES).until(() -> {
+            try {
+                Response response = get();
+                return response.getStatusCode() == 200;
+            } catch (Exception e) {
+                return false;
+            }
+        });
+
+        originalBaseUri = RestAssured.baseURI;
+        RestAssured.baseURI = RestAssured.baseURI + "/api/greeting";
     }
 
     @AfterClass
     public static void teardown() throws Exception {
-       openshift.cleanup();
+        openshift.cleanup();
     }
 
     @Test
-    public void test_A_ConfigMapExists() throws Exception {
-
+    public void testAConfigMapExists() throws Exception {
         Optional<ConfigMap> configMap = findConfigMap();
-        Assert.assertTrue(configMap.isPresent());
+        assertTrue(configMap.isPresent());
     }
 
     @Test
-    public void test_B_ConfigSourcePresent() {
-
-        expect().
-            statusCode(200).
-            body(containsString("Hello World!")).
-        when().
-            get(API_ENDPOINT);
+    public void testBDefaultGreeting() {
+        when()
+                .get()
+                .then()
+                .assertThat().statusCode(200)
+                .assertThat().body(containsString("Hello World from a ConfigMap!"));
     }
 
     @Test
+    public void testCCustomGreeting() {
+        given()
+                .queryParam("name", "Steve")
+                .when()
+                .get()
+                .then()
+                .assertThat().statusCode(200)
+                .assertThat().body(containsString("Hello Steve from a ConfigMap!"));
+    }
 
-    public void test_B_MissingConfigurationSource() {
+    @Test
+    public void testDUpdateConfigGreeting() throws Exception {
+//        openshift.client().configMaps().withName(CONFIGMAP_NAME)
+//                .edit()
+//                .addToData("app-config.yml", "greeting: message: Good morning %s from an updated ConfigMap!");
+//        openshift.rolloutChanges(APPLICATION_NAME);
+        openshift.deploy(CONFIGMAP_NAME, new File("target/test-classes/test-config-update.yml"));
 
+        rolloutChanges();
+
+        when()
+                .get()
+                .then()
+                .assertThat().statusCode(200)
+                .assertThat().body(containsString("Good morning World from an updated ConfigMap!"));
+    }
+
+    @Test
+    public void testEMissingConfigurationSource() throws Exception {
         openshift.deploy(CONFIGMAP_NAME, new File("target/test-classes/test-config-broken.yml"));
-        openshift.rolloutChanges(APPLICATION_NAME);
 
-        openshift.awaitApplicationReadinessOrFail();
+        rolloutChanges();
 
-        expect().
-                statusCode(500).
-                when().
-                get(API_ENDPOINT);
+        await().atMost(5, TimeUnit.MINUTES).until(() -> get().then().assertThat().statusCode(500));
     }
 
     private Optional<ConfigMap> findConfigMap() {
-
-        OpenShiftClient client = openshift.getClient();
+        OpenShiftClient client = openshift.client();
 
         List<ConfigMap> cfm = client.configMaps()
                 .inNamespace(client.getNamespace())
@@ -99,4 +129,39 @@ public class OpenshiftIT {
                 .findAny();
     }
 
+    private void rolloutChanges() throws InterruptedException {
+        String name = openshift.applicationName();
+
+        System.out.println("Rollout changes to " + name);
+
+        openshift.client().deploymentConfigs()
+                .inNamespace(openshift.client().getNamespace())
+                .withName(name)
+                .deployLatest();
+
+        await().atMost(5, TimeUnit.MINUTES).until(() -> openshift.client().deploymentConfigs()
+                .inNamespace(openshift.project())
+                .withName(name)
+                .get()
+                .getStatus()
+                .getAvailableReplicas() == 2
+        );
+
+        await().atMost(5, TimeUnit.MINUTES).until(() -> openshift.client().deploymentConfigs()
+                .inNamespace(openshift.project())
+                .withName(name)
+                .get()
+                .getStatus()
+                .getAvailableReplicas() == 1
+        );
+
+        await().atMost(5, TimeUnit.MINUTES).until(() -> {
+            try {
+                Response response = get(originalBaseUri + "/api/ping");
+                return response.getStatusCode() == 200;
+            } catch (Exception e) {
+                return false;
+            }
+        });
+    }
 }

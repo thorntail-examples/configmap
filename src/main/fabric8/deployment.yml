@@ -6,21 +6,18 @@ spec:
             httpGet:
               path: /api/ping
               port: 8080
-            initialDelaySeconds: 10
-            failureThreshold: 3
-            periodSeconds: 5
           volumeMounts:
             - name: config
               mountPath: /app/config
           env:
             - name: JAVA_OPTIONS
-              value: "-Dswarm.project.stage.file=file:///app/config/project-stages.yml"
+              value: "-Dswarm.project.stage.file=file:///app/config/project-defaults.yml"
       volumes:
         - configMap:
             name: app-config
             items:
             - key: "app-config.yml"
-              path: "project-stages.yml"
+              path: "project-defaults.yml"
           name: config
 
 
