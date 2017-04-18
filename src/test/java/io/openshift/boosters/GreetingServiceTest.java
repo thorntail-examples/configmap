@@ -40,4 +40,18 @@ public class GreetingServiceTest {
         Assert.assertTrue(response.readEntity(String.class).contains("Hello World from a ConfigMap!"));
     }
 
+    @Test
+    @RunAsClient
+    public void testResourceWithParam() {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8080")
+                .path("api")
+                .path("greeting")
+                .queryParam("name", "Peter");
+
+        Response response = target.request(MediaType.APPLICATION_JSON).get();
+        Assert.assertEquals(200, response.getStatus());
+        Assert.assertTrue(response.readEntity(String.class).contains("Hello Peter from a ConfigMap!"));
+    }
+
 }
