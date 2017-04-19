@@ -27,7 +27,7 @@
 
   <groupId>io.openshift.boosters</groupId>
   <artifactId>wfswarm-configmap</artifactId>
-  <version>3-SNAPSHOT</version>
+  <version>3</version>
   <packaging>war</packaging>
 
   <name>Config Map Example</name>
