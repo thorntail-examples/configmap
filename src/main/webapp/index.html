@@ -58,7 +58,9 @@
       <li>Run <code>oc edit configmap app-config</code></li>
       <li>Change the <code>message</code> entry to <code>Bonjour %s from a ConfigMap!</code></li>
       <li>Save</li>
-      <li>Run <code>oc rollout latest dc/{projectName}</code></li>
+      <li>Run <code>oc rollout latest dc/&lt;DEPLOYMENT_NAME&gt;</code> and wait for the pod to be restarted for it to pick up the changes.<p>
+          (To find out what deployment name you are using, use <code>oc get dc</code>)
+      </li>
     </ol>
   </div>
 </div>
