@@ -6,6 +6,14 @@ spec:
             httpGet:
               path: /api/ping
               port: 8080
+              scheme: HTTP
+          livenessProbe:
+            httpGet:
+              path: /api/ping
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 30
           volumeMounts:
             - name: config
               mountPath: /app/config
@@ -19,5 +27,3 @@ spec:
             - key: "app-config.yml"
               path: "project-defaults.yml"
           name: config
-
-
