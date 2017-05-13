@@ -150,26 +150,10 @@ public class OpenshiftIT {
 
         System.out.println("Rollout changes to " + name);
 
-        openshift.client().deploymentConfigs()
-                .inNamespace(openshift.client().getNamespace())
-                .withName(name)
-                .deployLatest();
-
-        await().atMost(5, TimeUnit.MINUTES).until(() -> openshift.client().deploymentConfigs()
-                .inNamespace(openshift.project())
-                .withName(name)
-                .get()
-                .getStatus()
-                .getAvailableReplicas() == 2
-        );
-
-        await().atMost(5, TimeUnit.MINUTES).until(() -> openshift.client().deploymentConfigs()
-                .inNamespace(openshift.project())
-                .withName(name)
-                .get()
-                .getStatus()
-                .getAvailableReplicas() == 1
-        );
+        // in reality, user would do `oc rollout latest`, but that's hard (racy) to wait for
+        // so here, we'll scale down to 0, wait for that, then scale back to 1 and wait again
+        scale(name, 0);
+        scale(name, 1);
 
         await().atMost(5, TimeUnit.MINUTES).until(() -> {
             try {
@@ -179,5 +163,20 @@ public class OpenshiftIT {
                 return false;
             }
         });
+    }
+
+    private void scale(String name, int replicas) {
+        openshift.client().deploymentConfigs()
+                .inNamespace(openshift.project())
+                .withName(name)
+                .scale(replicas);
+
+        await().atMost(5, TimeUnit.MINUTES).until(() -> openshift.client().deploymentConfigs()
+                .inNamespace(openshift.project())
+                .withName(name)
+                .get()
+                .getStatus()
+                .getAvailableReplicas() == replicas
+        );
     }
 }
