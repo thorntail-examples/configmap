@@ -24,6 +24,8 @@ import java.util.concurrent.TimeUnit;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import io.fabric8.kubernetes.api.model.ConfigMap;
+import io.fabric8.kubernetes.api.model.Pod;
+import io.fabric8.kubernetes.client.internal.readiness.Readiness;
 import io.fabric8.openshift.client.OpenShiftClient;
 import io.openshift.booster.test.OpenShiftTestAssistant;
 import org.junit.AfterClass;
@@ -171,12 +173,16 @@ public class OpenshiftIT {
                 .withName(name)
                 .scale(replicas);
 
-        await().atMost(5, TimeUnit.MINUTES).until(() -> openshift.client().deploymentConfigs()
-                .inNamespace(openshift.project())
-                .withName(name)
-                .get()
-                .getStatus()
-                .getAvailableReplicas() == replicas
-        );
+        await().atMost(5, TimeUnit.MINUTES).until(() -> {
+            // ideally, we'd look at deployment config's status.availableReplicas field,
+            // but that's only available since OpenShift 3.5
+            List<Pod> pods = openshift.client()
+                    .pods()
+                    .inNamespace(openshift.project())
+                    .withLabel("deploymentconfig", name)
+                    .list()
+                    .getItems();
+            return pods.size() == replicas && pods.stream().allMatch(Readiness::isPodReady);
+        });
     }
 }
