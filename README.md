@@ -1,1 +1,1 @@
-http://appdev.openshift.io/docs/mission-configmap-wf-swarm.html
+http://appdev-stage.openshift.io/docs/wf-swarm-runtime.html#mission-configmap-wf-swarm
