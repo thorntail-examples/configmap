@@ -159,7 +159,7 @@ public class OpenshiftIT {
 
         await().atMost(5, TimeUnit.MINUTES).until(() -> {
             try {
-                Response response = get(originalBaseUri + "/api/ping");
+                Response response = get(originalBaseUri);
                 return response.getStatusCode() == 200;
             } catch (Exception e) {
                 return false;
