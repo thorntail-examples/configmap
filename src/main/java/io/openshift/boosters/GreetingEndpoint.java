@@ -47,11 +47,4 @@ public class GreetingEndpoint {
 
     }
 
-    // Purely for OpenShift Readiness check
-    @GET
-    @Path("/ping")
-    @Produces("text/plain")
-    public String ping() {
-        return "pong";
-    }
 }

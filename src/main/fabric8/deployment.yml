@@ -2,19 +2,7 @@ spec:
   template:
     spec:
       containers:
-        - readinessProbe:
-            httpGet:
-              path: /api/ping
-              port: 8080
-              scheme: HTTP
-          livenessProbe:
-            httpGet:
-              path: /api/ping
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 60
-            periodSeconds: 30
-          volumeMounts:
+        - volumeMounts:
             - name: config
               mountPath: /app/config
           env:
