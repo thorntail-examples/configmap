@@ -21,7 +21,7 @@
   <parent>
     <groupId>io.openshift</groupId>
     <artifactId>booster-parent</artifactId>
-    <version>5</version>
+    <version>8</version>
   </parent>
 
   <groupId>io.openshift.boosters</groupId>
@@ -33,7 +33,7 @@
   <description>WildFly Swarm - Config Map</description>
 
   <properties>
-    <version.wildfly.swarm>2017.7.0</version.wildfly.swarm>
+    <version.wildfly.swarm>2017.8.1</version.wildfly.swarm>
     <version.resteasy>3.0.19.Final</version.resteasy>
 
     <failOnMissingWebXml>false</failOnMissingWebXml>
@@ -143,9 +143,6 @@
                 </excludes>
               </generator>
               <enricher>
-                <includes>
-                  <include>wildfly-swarm-health-check</include>
-                </includes>
                 <config>
                   <wildfly-swarm-health-check>
                     <path>/</path>

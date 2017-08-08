@@ -182,7 +182,13 @@ public class OpenshiftIT {
                     .withLabel("deploymentconfig", name)
                     .list()
                     .getItems();
-            return pods.size() == replicas && pods.stream().allMatch(Readiness::isPodReady);
+            try {
+                return pods.size() == replicas && pods.stream().allMatch(Readiness::isPodReady);
+            } catch (IllegalStateException e) {
+                // the 'Ready' condition can be missing sometimes, in which case Readiness.isPodReady throws an exception
+                // here, we'll swallow that exception in hope that the 'Ready' condition will appear later
+                return false;
+            }
         });
     }
 }
