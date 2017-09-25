@@ -2,3 +2,6 @@ target
 *.iml
 .idea
 /prod.sh
+/.settings/
+/.classpath
+/.project

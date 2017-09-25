@@ -29,13 +29,20 @@
   <version>7.0.0-redhat-1-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>Config Map Example</name>
-  <description>WildFly Swarm - Config Map</description>
+  <name>WildFly Swarm Booster - ConfigMap Mission</name>
 
   <properties>
     <version.wildfly.swarm>7.0.0.redhat-4</version.wildfly.swarm>
     <version.resteasy>3.0.19.Final</version.resteasy>
     <version.override.jackson>2.7.7</version.override.jackson>
+    <!-- Licenses - plugins -->
+    <version.wildfly.swarm.fraction.plugin>61</version.wildfly.swarm.fraction.plugin>
+    <version.xml-maven-plugin>1.0.1</version.xml-maven-plugin>
+    <version.license-maven-plugin>1.13</version.license-maven-plugin>
+    <version.wildfly-licenses-plugin>1.0.1</version.wildfly-licenses-plugin>
+    <!-- Licenses - JBoss repo URL used in custom-settings -->
+    <jboss.repo.url>https://maven.repository.redhat.com/ga/</jboss.repo.url>
+    <licenses.pom.file>pom.xml</licenses.pom.file>
     <failOnMissingWebXml>false</failOnMissingWebXml>
   </properties>
 
@@ -245,6 +252,86 @@
         </plugins>
       </build>
     </profile>
+
+      <!-- Activate this profile to generate licenses deliverables -->
+      <!-- Note that we cannot use "licenses" profile id as it's already defined by booster parent -->
+      <profile>
+         <id>generate-licenses</id>
+         <!-- Do not use system property activation - this profile must be inactive when this pom is used during license generation -->
+         <build>
+            <plugins>
+               <plugin>
+                  <artifactId>maven-resources-plugin</artifactId>
+                  <executions>
+                    <execution>
+                      <id>prepare-template</id>
+                      <phase>validate</phase>
+                      <goals>
+                        <goal>copy-resources</goal>
+                      </goals>
+                      <inherited>false</inherited>
+                      <configuration>
+                        <outputDirectory>${basedir}/target</outputDirectory>
+                        <resources>
+                          <resource>
+                            <directory>src/main/resources</directory>
+                            <filtering>true</filtering>
+                          </resource>
+                        </resources>
+                        <escapeString>\</escapeString>
+                      </configuration>
+                    </execution>
+                  </executions>
+               </plugin>
+               <plugin>
+                  <groupId>org.wildfly.swarm</groupId>
+                  <artifactId>wildfly-swarm-fraction-plugin</artifactId>
+                  <version>${version.wildfly.swarm.fraction.plugin}</version>
+                  <executions>
+                     <execution>
+                        <id>generate-licenses</id>
+                        <goals>
+                           <goal>generate-licenses</goal>
+                        </goals>
+                        <configuration>
+                           <licensesTemplate>${project.build.directory}/licenses/licenses-project-template.xml</licensesTemplate>
+                           <downloadSources>true</downloadSources>
+                           <downloadPoms>true</downloadPoms>
+                           <!-- Use custom settings to point to the local maven repo cache -->
+                           <userSettings>${project.build.directory}/licenses/custom-settings.xml</userSettings>
+                           <pomFile>${licenses.pom.file}</pomFile>
+                           <excludes>
+                              <exclude>org/codehaus/plexus/plexus/1.0.4/.*</exclude>
+                           </excludes>
+                        </configuration>
+                     </execution>
+                  </executions>
+               </plugin>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-assembly-plugin</artifactId>
+                  <configuration>
+                     <descriptors>
+                        <descriptor>src/assembly/assembly.xml</descriptor>
+                     </descriptors>
+                  </configuration>
+                  <executions>
+                     <execution>
+                        <id>assemble</id>
+                        <phase>package</phase>
+                        <goals>
+                           <goal>single</goal>
+                        </goals>
+                        <configuration>
+                           <tarLongFileMode>gnu</tarLongFileMode>
+                        </configuration>
+                     </execution>
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+
   </profiles>
 
   <repositories>
