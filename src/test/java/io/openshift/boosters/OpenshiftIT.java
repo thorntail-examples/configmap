@@ -16,7 +16,10 @@
 
 package io.openshift.boosters;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -27,11 +30,14 @@ import io.fabric8.kubernetes.api.model.ConfigMap;
 import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.client.internal.readiness.Readiness;
 import io.fabric8.openshift.client.OpenShiftClient;
-import io.openshift.booster.test.OpenShiftTestAssistant;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.arquillian.cube.kubernetes.api.Session;
+import org.arquillian.cube.openshift.impl.enricher.RouteURL;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.test.api.ArquillianResource;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 import static com.jayway.awaitility.Awaitility.await;
@@ -45,41 +51,32 @@ import static org.junit.Assert.assertTrue;
  * @author Heiko Braun
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(Arquillian.class)
 public class OpenshiftIT {
-
-    private static final OpenShiftTestAssistant openshift = new OpenShiftTestAssistant();
+    private static final String APP_NAME = "wfswarm-configmap";
 
     private static final String CONFIGMAP_NAME = "app-config";
 
-    private static String originalBaseUri;
+    @ArquillianResource
+    private OpenShiftClient oc;
 
-    @BeforeClass
-    public static void setup() throws Exception {
-        // pre-requisite for swarm
-        openshift.deploy(CONFIGMAP_NAME, new File("target/test-classes/test-config.yml"));
+    @ArquillianResource
+    private Session session;
 
-        // the application itself
-        openshift.deployApplication();
+    @RouteURL(APP_NAME)
+    private URL url;
 
-        // wait until the pods & routes become available
-        openshift.awaitApplicationReadinessOrFail();
-
+    @Before
+    public void setup() throws Exception {
         await().atMost(5, TimeUnit.MINUTES).until(() -> {
             try {
-                Response response = get();
-                return response.getStatusCode() == 200;
+                return get(url).getStatusCode() == 200;
             } catch (Exception e) {
                 return false;
             }
         });
 
-        originalBaseUri = RestAssured.baseURI;
-        RestAssured.baseURI = RestAssured.baseURI + "/api/greeting";
-    }
-
-    @AfterClass
-    public static void teardown() throws Exception {
-        openshift.cleanup();
+        RestAssured.baseURI = url + "api/greeting";
     }
 
     @Test
@@ -110,11 +107,7 @@ public class OpenshiftIT {
 
     @Test
     public void testDUpdateConfigGreeting() throws Exception {
-//        openshift.client().configMaps().withName(CONFIGMAP_NAME)
-//                .edit()
-//                .addToData("app-config.yml", "greeting: message: Good morning %s from an updated ConfigMap!");
-//        openshift.rolloutChanges(APPLICATION_NAME);
-        openshift.deploy(CONFIGMAP_NAME, new File("target/test-classes/test-config-update.yml"));
+        deployConfigMap("target/test-classes/test-config-update.yml");
 
         rolloutChanges();
 
@@ -127,7 +120,7 @@ public class OpenshiftIT {
 
     @Test
     public void testEMissingConfigurationSource() throws Exception {
-        openshift.deploy(CONFIGMAP_NAME, new File("target/test-classes/test-config-broken.yml"));
+        deployConfigMap("target/test-classes/test-config-broken.yml");
 
         rolloutChanges();
 
@@ -135,10 +128,8 @@ public class OpenshiftIT {
     }
 
     private Optional<ConfigMap> findConfigMap() {
-        OpenShiftClient client = openshift.client();
-
-        List<ConfigMap> cfm = client.configMaps()
-                .inNamespace(client.getNamespace())
+        List<ConfigMap> cfm = oc.configMaps()
+                .inNamespace(session.getNamespace())
                 .list()
                 .getItems();
 
@@ -147,19 +138,25 @@ public class OpenshiftIT {
                 .findAny();
     }
 
-    private void rolloutChanges() throws InterruptedException {
-        String name = openshift.applicationName();
+    private void deployConfigMap(String path) throws IOException {
+        try (InputStream yaml = new FileInputStream(path)) {
+            // in this test, this always replaces an existing configmap, which is already tracked for deleting
+            // after the test finishes
+            oc.load(yaml).createOrReplace();
+        }
+    }
 
-        System.out.println("Rollout changes to " + name);
+    private void rolloutChanges() throws InterruptedException {
+        System.out.println("Rollout changes to " + APP_NAME);
 
         // in reality, user would do `oc rollout latest`, but that's hard (racy) to wait for
         // so here, we'll scale down to 0, wait for that, then scale back to 1 and wait again
-        scale(name, 0);
-        scale(name, 1);
+        scale(APP_NAME, 0);
+        scale(APP_NAME, 1);
 
         await().atMost(5, TimeUnit.MINUTES).until(() -> {
             try {
-                Response response = get(originalBaseUri);
+                Response response = get(url);
                 return response.getStatusCode() == 200;
             } catch (Exception e) {
                 return false;
@@ -168,17 +165,17 @@ public class OpenshiftIT {
     }
 
     private void scale(String name, int replicas) {
-        openshift.client().deploymentConfigs()
-                .inNamespace(openshift.project())
+        oc.deploymentConfigs()
+                .inNamespace(session.getNamespace())
                 .withName(name)
                 .scale(replicas);
 
         await().atMost(5, TimeUnit.MINUTES).until(() -> {
             // ideally, we'd look at deployment config's status.availableReplicas field,
             // but that's only available since OpenShift 3.5
-            List<Pod> pods = openshift.client()
+            List<Pod> pods = oc
                     .pods()
-                    .inNamespace(openshift.project())
+                    .inNamespace(session.getNamespace())
                     .withLabel("deploymentconfig", name)
                     .list()
                     .getItems();
