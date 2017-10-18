@@ -138,6 +138,9 @@
             <classpathDependencyExclude>org.arquillian.cube:arquillian-cube-openshift</classpathDependencyExclude>
             <classpathDependencyExclude>org.arquillian.cube:arquillian-cube-kubernetes</classpathDependencyExclude>
           </classpathDependencyExcludes>
+          <systemPropertyVariables>
+            <swarm.build.repos>https://maven.repository.redhat.com/ga/,https://maven.repository.redhat.com/earlyaccess/all/</swarm.build.repos>
+          </systemPropertyVariables>
         </configuration>
       </plugin>
 
