@@ -35,15 +35,7 @@
     <version.wildfly.swarm>7.0.0.redhat-6</version.wildfly.swarm>
     <version.resteasy>3.0.19.Final</version.resteasy>
     <version.arquillian.cube>1.9.1</version.arquillian.cube>
-    <version.override.jackson>2.7.7</version.override.jackson>
-    <!-- Licenses - plugins -->
-    <version.wildfly.swarm.fraction.plugin>61</version.wildfly.swarm.fraction.plugin>
-    <version.xml-maven-plugin>1.0.1</version.xml-maven-plugin>
-    <version.license-maven-plugin>1.13</version.license-maven-plugin>
-    <version.wildfly-licenses-plugin>1.0.1</version.wildfly-licenses-plugin>
-    <!-- Licenses - JBoss repo URL used in custom-settings -->
-    <jboss.repo.url>https://maven.repository.redhat.com/ga/</jboss.repo.url>
-    <licenses.pom.file>pom.xml</licenses.pom.file>
+    <version.override.jackson>2.7.7</version.override.jackson>    
     <failOnMissingWebXml>false</failOnMissingWebXml>
   </properties>
 
@@ -287,7 +279,7 @@
         </plugins>
       </build>
     </profile>
-  
+
   </profiles>
 
 </project>
