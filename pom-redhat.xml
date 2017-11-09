@@ -34,7 +34,7 @@
   <properties>
     <version.wildfly.swarm>7.0.0.redhat-8</version.wildfly.swarm>
     <version.resteasy>3.0.19.Final</version.resteasy>
-    <version.arquillian.cube>1.9.1</version.arquillian.cube>
+    <version.arquillian.cube>1.9.2</version.arquillian.cube>
     <version.override.jackson>2.7.7</version.override.jackson>
     <failOnMissingWebXml>false</failOnMissingWebXml>
   </properties>
@@ -273,6 +273,9 @@
                 <additionalClasspathElement>${project.build.directory}/dependency/jackson-annotations.jar</additionalClasspathElement>
                 <additionalClasspathElement>${project.build.directory}/dependency/jackson-databind.jar</additionalClasspathElement>
               </additionalClasspathElements>
+              <systemPropertyVariables>
+                <app.name>${project.artifactId}</app.name>
+              </systemPropertyVariables>
             </configuration>
             <executions>
               <execution>
