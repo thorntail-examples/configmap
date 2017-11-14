@@ -26,23 +26,16 @@
 
   <groupId>io.openshift.boosters</groupId>
   <artifactId>wfswarm-configmap</artifactId>
-  <version>10-SNAPSHOT</version>
+  <version>7.0.0-redhat-6</version>
   <packaging>war</packaging>
 
   <name>WildFly Swarm Booster - ConfigMap Mission</name>
 
   <properties>
-    <version.wildfly.swarm>2017.10.0</version.wildfly.swarm>
+    <version.wildfly.swarm>7.0.0.redhat-8</version.wildfly.swarm>
     <version.resteasy>3.0.19.Final</version.resteasy>
     <version.arquillian.cube>1.9.2</version.arquillian.cube>
-    <!-- Licenses - plugins -->
-    <version.wildfly.swarm.fraction.plugin>61</version.wildfly.swarm.fraction.plugin>
-    <version.xml-maven-plugin>1.0.1</version.xml-maven-plugin>
-    <version.license-maven-plugin>1.13</version.license-maven-plugin>
-    <version.wildfly-licenses-plugin>1.0.1</version.wildfly-licenses-plugin>
-    <!-- Licenses - JBoss repo URL used in custom-settings -->
-    <jboss.repo.url>https://repository.jboss.org/nexus/content/groups/public</jboss.repo.url>
-    <licenses.pom.file>pom.xml</licenses.pom.file>
+    <version.override.jackson>2.7.7</version.override.jackson>
     <failOnMissingWebXml>false</failOnMissingWebXml>
   </properties>
 
@@ -51,6 +44,13 @@
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>bom</artifactId>
+        <version>${version.wildfly.swarm}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>bom-certified</artifactId>
         <version>${version.wildfly.swarm}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -95,6 +95,13 @@
     </dependency>
 
     <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>arquillian</artifactId>
       <scope>test</scope>
@@ -130,6 +137,9 @@
             <classpathDependencyExclude>org.arquillian.cube:arquillian-cube-openshift</classpathDependencyExclude>
             <classpathDependencyExclude>org.arquillian.cube:arquillian-cube-kubernetes</classpathDependencyExclude>
           </classpathDependencyExcludes>
+          <systemPropertyVariables>
+            <swarm.build.repos>https://maven.repository.redhat.com/ga/,https://maven.repository.redhat.com/earlyaccess/all/</swarm.build.repos>
+          </systemPropertyVariables>
         </configuration>
       </plugin>
 
@@ -197,10 +207,72 @@
       <id>openshift-it</id>
       <build>
         <plugins>
+          <!--
+            - 1.
+            -
+            - For running the test, we need the Jackson dependencies in a higher version than what is brought in by Swarm.
+            - Unfortunately, Failsafe can't be configured do add specific artifacts to the test classpath, just files,
+            - so we need to download the dependencies manually. This is what this plugin execution does.
+            -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>prepare-jackson-dependencies-for-integration-test</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+                <configuration>
+                  <stripVersion>true</stripVersion>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>com.fasterxml.jackson.core</groupId>
+                      <artifactId>jackson-core</artifactId>
+                      <version>${version.override.jackson}</version>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>com.fasterxml.jackson.core</groupId>
+                      <artifactId>jackson-annotations</artifactId>
+                      <version>${version.override.jackson}</version>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>com.fasterxml.jackson.core</groupId>
+                      <artifactId>jackson-databind</artifactId>
+                      <version>${version.override.jackson}</version>
+                    </artifactItem>
+                  </artifactItems>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
             <configuration>
+              <!--
+                - 2.
+                -
+                - These artifacts are added to the test classpath automatically because they are project dependencies.
+                - However, they are of too old versions, so we remove them here and add correct versions later.
+                -->
+              <classpathDependencyExcludes>
+                <classpathDependencyExclude>com.fasterxml.jackson.core:jackson-core</classpathDependencyExclude>
+                <classpathDependencyExclude>com.fasterxml.jackson.core:jackson-annotations</classpathDependencyExclude>
+                <classpathDependencyExclude>com.fasterxml.jackson.core:jackson-databind</classpathDependencyExclude>
+              </classpathDependencyExcludes>
+              <!--
+                - 3.
+                -
+                - And here, we add the correct versions of the artifacts to test classpath. Unfortunately,
+                - this is only possible by file paths, not by artifact coordinates.
+                -->
+              <additionalClasspathElements>
+                <additionalClasspathElement>${project.build.directory}/dependency/jackson-core.jar</additionalClasspathElement>
+                <additionalClasspathElement>${project.build.directory}/dependency/jackson-annotations.jar</additionalClasspathElement>
+                <additionalClasspathElement>${project.build.directory}/dependency/jackson-databind.jar</additionalClasspathElement>
+              </additionalClasspathElements>
               <systemPropertyVariables>
                 <app.name>${project.artifactId}</app.name>
               </systemPropertyVariables>
