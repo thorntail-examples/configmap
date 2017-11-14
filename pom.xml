@@ -34,7 +34,7 @@
   <properties>
     <version.wildfly.swarm>2017.10.0</version.wildfly.swarm>
     <version.resteasy>3.0.19.Final</version.resteasy>
-    <version.arquillian.cube>1.9.1</version.arquillian.cube>
+    <version.arquillian.cube>1.9.2</version.arquillian.cube>
     <!-- Licenses - plugins -->
     <version.wildfly.swarm.fraction.plugin>61</version.wildfly.swarm.fraction.plugin>
     <version.xml-maven-plugin>1.0.1</version.xml-maven-plugin>
@@ -200,6 +200,11 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <systemPropertyVariables>
+                <app.name>${project.artifactId}</app.name>
+              </systemPropertyVariables>
+            </configuration>
             <executions>
               <execution>
                 <goals>

@@ -53,7 +53,7 @@ import static org.junit.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
 public class OpenshiftIT {
-    private static final String APP_NAME = "wfswarm-configmap";
+    private static final String APP_NAME = System.getProperty("app.name");
 
     private static final String CONFIGMAP_NAME = "app-config";
 
@@ -63,7 +63,7 @@ public class OpenshiftIT {
     @ArquillianResource
     private Session session;
 
-    @RouteURL(APP_NAME)
+    @RouteURL("${app.name}")
     private URL url;
 
     @Before
