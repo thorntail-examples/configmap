@@ -4,4 +4,4 @@ versions:
   - id: community
     name: 2017.10.0 (Community)
   - id: redhat
-    name: 7.0.0.redhat-6 (RHOAR)
+    name: 7.0.0.redhat-8 (RHOAR)
