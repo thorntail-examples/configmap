@@ -24,12 +24,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Response;
 import io.fabric8.kubernetes.api.model.ConfigMap;
 import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.client.internal.readiness.Readiness;
 import io.fabric8.openshift.client.OpenShiftClient;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.arquillian.cube.kubernetes.api.Session;
 import org.arquillian.cube.openshift.impl.enricher.RouteURL;
 import org.jboss.arquillian.junit.Arquillian;
@@ -40,10 +40,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-import static com.jayway.awaitility.Awaitility.await;
-import static com.jayway.restassured.RestAssured.get;
-import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.RestAssured.when;
+import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
+import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertTrue;
 
@@ -124,7 +124,7 @@ public class OpenshiftIT {
 
         rolloutChanges();
 
-        await().atMost(5, TimeUnit.MINUTES).until(() -> get().then().assertThat().statusCode(500));
+        await().atMost(5, TimeUnit.MINUTES).untilAsserted(() -> get().then().assertThat().statusCode(500));
     }
 
     private Optional<ConfigMap> findConfigMap() {

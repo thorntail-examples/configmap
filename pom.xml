@@ -21,7 +21,7 @@
   <parent>
     <groupId>io.openshift</groupId>
     <artifactId>booster-parent</artifactId>
-    <version>10</version>
+    <version>18</version>
   </parent>
 
   <groupId>io.openshift.boosters</groupId>
@@ -32,17 +32,11 @@
   <name>WildFly Swarm Booster - ConfigMap Mission</name>
 
   <properties>
-    <version.wildfly.swarm>2017.10.0</version.wildfly.swarm>
+    <version.wildfly.swarm>2018.3.3</version.wildfly.swarm>
     <version.resteasy>3.0.19.Final</version.resteasy>
-    <version.arquillian.cube>1.9.2</version.arquillian.cube>
-    <!-- Licenses - plugins -->
-    <version.wildfly.swarm.fraction.plugin>61</version.wildfly.swarm.fraction.plugin>
-    <version.xml-maven-plugin>1.0.1</version.xml-maven-plugin>
-    <version.license-maven-plugin>1.13</version.license-maven-plugin>
-    <version.wildfly-licenses-plugin>1.0.1</version.wildfly-licenses-plugin>
-    <!-- Licenses - JBoss repo URL used in custom-settings -->
-    <jboss.repo.url>https://repository.jboss.org/nexus/content/groups/public</jboss.repo.url>
-    <licenses.pom.file>pom.xml</licenses.pom.file>
+    <version.restassured>3.0.6</version.restassured>
+    <version.awaitility>3.0.0</version.awaitility>
+    <version.openshift.client>3.1.8</version.openshift.client>
     <failOnMissingWebXml>false</failOnMissingWebXml>
   </properties>
 
@@ -52,14 +46,6 @@
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>bom</artifactId>
         <version>${version.wildfly.swarm}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>org.arquillian.cube</groupId>
-        <artifactId>arquillian-cube-bom</artifactId>
-        <version>${version.arquillian.cube}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -101,9 +87,30 @@
     </dependency>
 
     <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>${version.restassured}</version>
+      <scope>test</scope> 
+    </dependency>
+
+    <dependency>
+       <groupId>org.awaitility</groupId>
+       <artifactId>awaitility</artifactId>
+       <version>${version.awaitility}</version>
+       <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>org.jboss.arquillian.junit</groupId>
       <artifactId>arquillian-junit-container</artifactId>
       <version>1.1.12.Final</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>openshift-client</artifactId>
+      <version>${version.openshift.client}</version>
       <scope>test</scope>
     </dependency>
 
