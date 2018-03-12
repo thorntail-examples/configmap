@@ -1,7 +1,0 @@
-name: WildFly Swarm - Config Map
-description: Simple HTTP endpoint where the WildFly Swarm application uses OpenShift ConfigMap to retrieve application parameters.
-versions:
-  - id: community
-    name: 2018.3.3 (Community)
-  - id: redhat
-    name: 7.0.0.redhat-8 (RHOAR)
