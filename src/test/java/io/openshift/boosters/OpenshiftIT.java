@@ -31,6 +31,7 @@ import io.fabric8.openshift.client.OpenShiftClient;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.arquillian.cube.kubernetes.api.Session;
+import org.arquillian.cube.openshift.impl.enricher.AwaitRoute;
 import org.arquillian.cube.openshift.impl.enricher.RouteURL;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -64,18 +65,11 @@ public class OpenshiftIT {
     private Session session;
 
     @RouteURL("${app.name}")
+    @AwaitRoute
     private URL url;
 
     @Before
     public void setup() throws Exception {
-        await().atMost(5, TimeUnit.MINUTES).until(() -> {
-            try {
-                return get(url).getStatusCode() == 200;
-            } catch (Exception e) {
-                return false;
-            }
-        });
-
         RestAssured.baseURI = url + "api/greeting";
     }
 
