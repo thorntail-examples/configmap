@@ -33,11 +33,10 @@
 
   <properties>
     <version.wildfly.swarm>2018.3.3</version.wildfly.swarm>
-    <version.resteasy>3.0.19.Final</version.resteasy>
+    <version.resteasy>3.0.24.Final</version.resteasy>
     <version.restassured>3.0.6</version.restassured>
     <version.awaitility>3.0.0</version.awaitility>
     <version.openshift.client>3.1.8</version.openshift.client>
-    <failOnMissingWebXml>false</failOnMissingWebXml>
   </properties>
 
   <dependencyManagement>
@@ -98,13 +97,6 @@
        <artifactId>awaitility</artifactId>
        <version>${version.awaitility}</version>
        <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jboss.arquillian.junit</groupId>
-      <artifactId>arquillian-junit-container</artifactId>
-      <version>1.1.12.Final</version>
-      <scope>test</scope>
     </dependency>
 
     <dependency>
