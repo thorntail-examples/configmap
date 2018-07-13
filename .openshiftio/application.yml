@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Template
 metadata:
-  name: wfswarm-configmap
+  name: thorntail-configmap
 parameters:
 - name: SOURCE_REPOSITORY_URL
   description: The source URL for the application
@@ -28,12 +28,12 @@ objects:
 - apiVersion: v1
   kind: ImageStream
   metadata:
-    name: wfswarm-configmap
+    name: thorntail-configmap
   spec: {}
 - apiVersion: v1
   kind: ImageStream
   metadata:
-    name: runtime-wfswarm-configmap
+    name: runtime-thorntail-configmap
   spec:
     tags:
     - name: latest
@@ -43,12 +43,12 @@ objects:
 - apiVersion: v1
   kind: BuildConfig
   metadata:
-    name: wfswarm-configmap
+    name: thorntail-configmap
   spec:
     output:
       to:
         kind: ImageStreamTag
-        name: wfswarm-configmap:latest
+        name: thorntail-configmap:latest
     postCommit: {}
     resources: {}
     source:
@@ -61,7 +61,7 @@ objects:
       sourceStrategy:
         from:
           kind: ImageStreamTag
-          name: runtime-wfswarm-configmap:latest
+          name: runtime-thorntail-configmap:latest
         incremental: true
         env:
         - name: MAVEN_ARGS_APPEND
@@ -83,9 +83,9 @@ objects:
   metadata:
     labels:
       expose: "true"
-      app: wfswarm-configmap
+      app: thorntail-configmap
       group: io.openshift.boosters
-    name: wfswarm-configmap
+    name: thorntail-configmap
   spec:
     ports:
     - name: http
@@ -93,20 +93,20 @@ objects:
       protocol: TCP
       targetPort: 8080
     selector:
-      app: wfswarm-configmap
+      app: thorntail-configmap
       group: io.openshift.boosters
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
     labels:
-      app: wfswarm-configmap
+      app: thorntail-configmap
       group: io.openshift.boosters
-    name: wfswarm-configmap
+    name: thorntail-configmap
   spec:
     replicas: 1
     revisionHistoryLimit: 2
     selector:
-      app: wfswarm-configmap
+      app: thorntail-configmap
       group: io.openshift.boosters
     strategy:
       rollingParams:
@@ -115,7 +115,7 @@ objects:
     template:
       metadata:
         labels:
-          app: wfswarm-configmap
+          app: thorntail-configmap
           group: io.openshift.boosters
       spec:
         volumes:
@@ -133,7 +133,7 @@ objects:
                 fieldPath: metadata.namespace
           - name: JAVA_OPTIONS
             value: "-Dswarm.project.stage.file=file:///app/config/project-defaults.yml"
-          image: wfswarm-configmap:latest
+          image: thorntail-configmap:latest
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
@@ -141,7 +141,7 @@ objects:
               port: 8080
               scheme: HTTP
             initialDelaySeconds: 180
-          name: wildfly-swarm
+          name: thorntail
           ports:
           - containerPort: 8080
             name: http
@@ -168,21 +168,21 @@ objects:
     - imageChangeParams:
         automatic: true
         containerNames:
-        - wildfly-swarm
+        - thorntail
         from:
           kind: ImageStreamTag
-          name: wfswarm-configmap:latest
+          name: thorntail-configmap:latest
       type: ImageChange
 - apiVersion: v1
   kind: Route
   metadata:
     labels:
-      app: wfswarm-configmap
+      app: thorntail-configmap
       group: io.openshift.boosters
-    name: wfswarm-configmap
+    name: thorntail-configmap
   spec:
     port:
       targetPort: 8080
     to:
       kind: Service
-      name: wfswarm-configmap
+      name: thorntail-configmap
