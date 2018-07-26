@@ -25,14 +25,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @Path("/")
 @ApplicationScoped
 public class GreetingEndpoint {
 
     @Inject
-    @ConfigurationValue("greeting.message")
+    @ConfigProperty(name = "greeting.message")
     private Optional<String> message;
 
     @GET
