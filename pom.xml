@@ -70,7 +70,7 @@
 
     <dependency>
       <groupId>io.thorntail</groupId>
-      <artifactId>cdi-config</artifactId>
+      <artifactId>microprofile-config</artifactId>
     </dependency>
 
     <dependency>
