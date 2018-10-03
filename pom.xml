@@ -32,7 +32,7 @@
   <name>Thorntail Booster - ConfigMap Mission</name>
 
   <properties>
-    <version.thorntail>2.1.0.Final</version.thorntail>
+    <version.thorntail>2.2.0.Final</version.thorntail>
     <version.resteasy>3.0.24.Final</version.resteasy>
     <version.restassured>3.0.7</version.restassured>
     <version.awaitility>3.1.0</version.awaitility>
