@@ -38,11 +38,6 @@ import org.wildfly.swarm.arquillian.DefaultDeployment;
 @DefaultDeployment
 public class GreetingServiceTest {
 
-    @CreateSwarm
-    public static Swarm newContainer() throws Exception {
-        return new Swarm().withConfig(GreetingServiceTest.class.getClassLoader().getResource("project-defaults.yml"));
-    }
-
     @Test
     @RunAsClient
     public void testResource() {
