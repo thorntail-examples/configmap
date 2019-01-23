@@ -26,7 +26,7 @@
 
   <groupId>io.openshift.boosters</groupId>
   <artifactId>thorntail-configmap</artifactId>
-  <version>14</version>
+  <version>15-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <name>Thorntail Booster - ConfigMap Mission</name>
