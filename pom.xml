@@ -36,7 +36,7 @@
     <version.resteasy>3.6.2.Final</version.resteasy>
     <version.restassured>3.0.7</version.restassured>
     <version.awaitility>3.1.5</version.awaitility>
-    <version.openshift.client>3.1.8</version.openshift.client>
+    <version.openshift.client>4.1.2</version.openshift.client>
   </properties>
 
   <dependencyManagement>
