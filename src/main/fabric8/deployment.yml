@@ -2,16 +2,16 @@ spec:
   template:
     spec:
       containers:
-        - volumeMounts:
-            - name: config
-              mountPath: /app/config
-          env:
-            - name: JAVA_OPTIONS
-              value: "-Dswarm.project.stage.file=file:///app/config/project-defaults.yml"
+      - volumeMounts:
+        - name: config
+          mountPath: /app/config
+        env:
+        - name: JAVA_OPTIONS
+          value: "-Dthorntail.project.stage.file=file:///app/config/project-defaults.yml"
       volumes:
-        - configMap:
+        - name: config
+          configMap:
             name: app-config
             items:
             - key: "app-config.yml"
               path: "project-defaults.yml"
-          name: config
