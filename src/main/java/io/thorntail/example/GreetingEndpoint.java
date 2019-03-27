@@ -13,24 +13,23 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package io.openshift.boosters;
+package io.thorntail.example;
 
-import java.util.Optional;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
+import java.util.Optional;
 
 @Path("/")
 @ApplicationScoped
 public class GreetingEndpoint {
-
     @Inject
     @ConfigProperty(name = "greeting.message")
     private Optional<String> message;
@@ -38,13 +37,10 @@ public class GreetingEndpoint {
     @GET
     @Path("/greeting")
     @Produces("application/json")
-    public Response greeting(@QueryParam("name") String name) {
-        String suffix = name != null ? name : "World";
-
+    public Response greeting(@QueryParam("name") @DefaultValue("World") String name) {
         return message
-                .map(s -> Response.ok().entity(new Greeting(String.format(s, suffix))).build())
+                .map(s -> Response.ok().entity(new Greeting(String.format(s, name))).build())
                 .orElseGet(() -> Response.status(500).entity("ConfigMap not present").build());
 
     }
-
 }

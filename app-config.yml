@@ -1,4 +1,4 @@
 greeting:
   message: Hello %s from a ConfigMap!
-swarm:
+thorntail:
   logging: INFO

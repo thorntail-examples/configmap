@@ -2,11 +2,18 @@ apiVersion: v1
 kind: Template
 metadata:
   name: thorntail-configmap
+  annotations:
+    iconClass: icon-jboss
+    tags: thorntail, java, microservice
+    template.openshift.io/provider-display-name: "Red Hat, Inc."
+    template.openshift.io/documentation-url: "https://launcher.fabric8.io/docs/thorntail-runtime.html#mission-configmap-wf-swarm"
+    description: >-
+      The Externalized Configuration example shows how to use a ConfigMap to externalize configuration.
 parameters:
 - name: SOURCE_REPOSITORY_URL
   description: The source URL for the application
   displayName: Source URL
-  value: https://github.com/wildfly-swarm-openshiftio-boosters/wfswarm-configmap.git
+  value: https://github.com/thorntail-examples/configmap.git
   required: true
 - name: SOURCE_REPOSITORY_REF
   description: The branch name for the application
@@ -84,7 +91,7 @@ objects:
     labels:
       expose: "true"
       app: thorntail-configmap
-      group: io.openshift.boosters
+      group: io.thorntail.example
     name: thorntail-configmap
   spec:
     ports:
@@ -94,20 +101,20 @@ objects:
       targetPort: 8080
     selector:
       app: thorntail-configmap
-      group: io.openshift.boosters
+      group: io.thorntail.example
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
     labels:
       app: thorntail-configmap
-      group: io.openshift.boosters
+      group: io.thorntail.example
     name: thorntail-configmap
   spec:
     replicas: 1
     revisionHistoryLimit: 2
     selector:
       app: thorntail-configmap
-      group: io.openshift.boosters
+      group: io.thorntail.example
     strategy:
       rollingParams:
         timeoutSeconds: 3600
@@ -116,7 +123,7 @@ objects:
       metadata:
         labels:
           app: thorntail-configmap
-          group: io.openshift.boosters
+          group: io.thorntail.example
       spec:
         volumes:
           - configMap:
@@ -178,7 +185,7 @@ objects:
   metadata:
     labels:
       app: thorntail-configmap
-      group: io.openshift.boosters
+      group: io.thorntail.example
     name: thorntail-configmap
   spec:
     port:

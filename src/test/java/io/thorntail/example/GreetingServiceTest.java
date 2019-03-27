@@ -13,8 +13,13 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+package io.thorntail.example;
 
-package io.openshift.boosters;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.wildfly.swarm.arquillian.DefaultDeployment;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -22,38 +27,28 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.wildfly.swarm.Swarm;
-import org.wildfly.swarm.arquillian.CreateSwarm;
-import org.wildfly.swarm.arquillian.DefaultDeployment;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-/**
- * @author Heiko Braun
- */
 @RunWith(Arquillian.class)
 @DefaultDeployment
 public class GreetingServiceTest {
-
     @Test
     @RunAsClient
-    public void testResource() {
+    public void resource() {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://localhost:8080")
                 .path("api")
                 .path("greeting");
 
         Response response = target.request(MediaType.APPLICATION_JSON).get();
-        Assert.assertEquals(200, response.getStatus());
-        Assert.assertTrue(response.readEntity(String.class).contains("Hello World from a ConfigMap!"));
+        assertEquals(200, response.getStatus());
+        assertTrue(response.readEntity(String.class).contains("Hello World from a ConfigMap!"));
     }
 
     @Test
     @RunAsClient
-    public void testResourceWithParam() {
+    public void resourceWithParam() {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://localhost:8080")
                 .path("api")
@@ -61,8 +56,7 @@ public class GreetingServiceTest {
                 .queryParam("name", "Peter");
 
         Response response = target.request(MediaType.APPLICATION_JSON).get();
-        Assert.assertEquals(200, response.getStatus());
-        Assert.assertTrue(response.readEntity(String.class).contains("Hello Peter from a ConfigMap!"));
+        assertEquals(200, response.getStatus());
+        assertTrue(response.readEntity(String.class).contains("Hello Peter from a ConfigMap!"));
     }
-
 }

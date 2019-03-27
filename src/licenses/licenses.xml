@@ -697,7 +697,7 @@
       </licenses>
     </dependency>
     <dependency>
-      <groupId>io.openshift.boosters</groupId>
+      <groupId>io.openshift.booster</groupId>
       <artifactId>thorntail-configmap</artifactId>
       <version>14</version>
       fcc

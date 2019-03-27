@@ -13,8 +13,22 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+package io.thorntail.example;
 
-package io.openshift.boosters;
+import io.fabric8.kubernetes.api.model.ConfigMap;
+import io.fabric8.kubernetes.api.model.Pod;
+import io.fabric8.kubernetes.client.internal.readiness.Readiness;
+import io.fabric8.openshift.client.OpenShiftClient;
+import io.restassured.response.Response;
+import org.arquillian.cube.kubernetes.api.Session;
+import org.arquillian.cube.openshift.impl.enricher.AwaitRoute;
+import org.arquillian.cube.openshift.impl.enricher.RouteURL;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.test.api.ArquillianResource;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,35 +38,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import io.fabric8.kubernetes.api.model.ConfigMap;
-import io.fabric8.kubernetes.api.model.Pod;
-import io.fabric8.kubernetes.client.internal.readiness.Readiness;
-import io.fabric8.openshift.client.OpenShiftClient;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import org.arquillian.cube.kubernetes.api.Session;
-import org.arquillian.cube.openshift.impl.enricher.AwaitRoute;
-import org.arquillian.cube.openshift.impl.enricher.RouteURL;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.test.api.ArquillianResource;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
-
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertTrue;
 
-/**
- * @author Heiko Braun
- */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OpenshiftIT {
     private static final String APP_NAME = System.getProperty("app.name");
 
@@ -66,68 +59,78 @@ public class OpenshiftIT {
 
     @RouteURL("${app.name}")
     @AwaitRoute
-    private URL url;
+    private URL baseUrl;
 
-    @Before
-    public void setup() throws Exception {
-        RestAssured.baseURI = url + "api/greeting";
-    }
+    @RouteURL(value = "${app.name}", path = "/api/greeting")
+    private String url;
 
     @Test
-    public void testAConfigMapExists() throws Exception {
+    public void _01_configMapExists() {
         Optional<ConfigMap> configMap = findConfigMap();
         assertTrue(configMap.isPresent());
     }
 
     @Test
-    public void testBDefaultGreeting() {
-        when()
-                .get()
-                .then()
-                .assertThat().statusCode(200)
-                .assertThat().body(containsString("Hello World from a ConfigMap!"));
-    }
-
-    @Test
-    public void testCCustomGreeting() {
+    public void _02_defaultGreeting() {
         given()
-                .queryParam("name", "Steve")
-                .when()
+                .baseUri(url)
+        .when()
                 .get()
-                .then()
-                .assertThat().statusCode(200)
-                .assertThat().body(containsString("Hello Steve from a ConfigMap!"));
+        .then()
+                .statusCode(200)
+                .body(containsString("Hello World from a ConfigMap!"));
     }
 
     @Test
-    public void testDUpdateConfigGreeting() throws Exception {
+    public void _03_customGreeting() {
+        given()
+                .baseUri(url)
+        .when()
+                .queryParam("name", "Steve")
+                .get()
+        .then()
+                .statusCode(200)
+                .body(containsString("Hello Steve from a ConfigMap!"));
+    }
+
+    @Test
+    public void _04_updateConfigGreeting() throws Exception {
         deployConfigMap("target/test-classes/test-config-update.yml");
 
         rolloutChanges();
 
-        when()
+        given()
+                .baseUri(url)
+        .when()
                 .get()
-                .then()
-                .assertThat().statusCode(200)
-                .assertThat().body(containsString("Good morning World from an updated ConfigMap!"));
+        .then()
+                .statusCode(200)
+                .body(containsString("Good morning World from an updated ConfigMap!"));
     }
 
     @Test
-    public void testEMissingConfigurationSource() throws Exception {
+    public void _05_missingConfigurationSource() throws Exception {
         deployConfigMap("target/test-classes/test-config-broken.yml");
 
         rolloutChanges();
 
-        await().atMost(5, TimeUnit.MINUTES).untilAsserted(() -> get().then().assertThat().statusCode(500));
+        await().atMost(5, TimeUnit.MINUTES).untilAsserted(() -> {
+            given()
+                    .baseUri(url)
+            .when()
+                    .get()
+            .then()
+                    .statusCode(500);
+        });
     }
 
     private Optional<ConfigMap> findConfigMap() {
-        List<ConfigMap> cfm = oc.configMaps()
+        List<ConfigMap> configMaps = oc.configMaps()
                 .inNamespace(session.getNamespace())
                 .list()
                 .getItems();
 
-        return cfm.stream()
+        return configMaps.stream()
                 .filter(m -> CONFIGMAP_NAME.equals(m.getMetadata().getName()))
                 .findAny();
     }
@@ -135,12 +138,12 @@ public class OpenshiftIT {
     private void deployConfigMap(String path) throws IOException {
         try (InputStream yaml = new FileInputStream(path)) {
             // in this test, this always replaces an existing configmap, which is already tracked for deleting
-            // after the test finishes
+            // after the test finishes, so we don't have to care about deleting it
             oc.load(yaml).createOrReplace();
         }
     }
 
-    private void rolloutChanges() throws InterruptedException {
+    private void rolloutChanges() {
         System.out.println("Rollout changes to " + APP_NAME);
 
         // in reality, user would do `oc rollout latest`, but that's hard (racy) to wait for
@@ -150,7 +153,7 @@ public class OpenshiftIT {
 
         await().atMost(5, TimeUnit.MINUTES).until(() -> {
             try {
-                Response response = get(url);
+                Response response = get(baseUrl);
                 return response.getStatusCode() == 200;
             } catch (Exception e) {
                 return false;

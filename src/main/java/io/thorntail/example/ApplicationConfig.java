@@ -13,16 +13,11 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
-package io.openshift.boosters;
+package io.thorntail.example;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-/**
- * Resource entry point
- */
 @ApplicationPath("/api")
 public class ApplicationConfig extends Application {
-
 }
