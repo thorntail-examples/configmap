@@ -139,7 +139,7 @@ objects:
               fieldRef:
                 fieldPath: metadata.namespace
           - name: JAVA_OPTIONS
-            value: "-Dswarm.project.stage.file=file:///app/config/project-defaults.yml"
+            value: "-Dthorntail.project.stage.file=file:///app/config/project-defaults.yml"
           image: thorntail-configmap:latest
           imagePullPolicy: IfNotPresent
           livenessProbe:
