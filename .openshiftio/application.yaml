@@ -31,6 +31,10 @@ parameters:
   required: true
   from: '[a-zA-Z0-9]{40}'
   generate: expression
+- name: MAVEN_MIRROR_URL
+  description: URL of a Maven repository that will be used during build phase as a global Maven mirror
+  displayName: Maven Mirror URL
+  required: false
 objects:
 - apiVersion: v1
   kind: ImageStream
@@ -73,6 +77,8 @@ objects:
         env:
         - name: MAVEN_ARGS_APPEND
           value: "-pl ${SOURCE_REPOSITORY_DIR}"
+        - name: MAVEN_MIRROR_URL
+          value: "${MAVEN_MIRROR_URL}"
         - name: ARTIFACT_DIR
           value: "${SOURCE_REPOSITORY_DIR}/target"
       type: Source
