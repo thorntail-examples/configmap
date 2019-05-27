@@ -43,7 +43,7 @@
     <version.fabric8-maven-plugin>4.1.0</version.fabric8-maven-plugin>
     <version.fabric8-openshift-client>4.2.2</version.fabric8-openshift-client>
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
-    <version.maven-war-plugin>3.2.2</version.maven-war-plugin>
+    <version.maven-war-plugin>3.2.3</version.maven-war-plugin>
     <version.restassured>4.0.0</version.restassured>
     <version.resteasy>3.6.2.Final</version.resteasy>
     <version.thorntail>2.4.0.Final</version.thorntail>
