@@ -39,7 +39,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <version.arquillian-cube>1.18.2</version.arquillian-cube>
-    <version.awaitility>3.1.6</version.awaitility>
+    <version.awaitility>4.0.0</version.awaitility>
     <version.fabric8-maven-plugin>4.2.0</version.fabric8-maven-plugin>
     <version.fabric8-openshift-client>4.4.2</version.fabric8-openshift-client>
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
