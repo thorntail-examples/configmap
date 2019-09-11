@@ -41,7 +41,7 @@
     <version.arquillian-cube>1.18.2</version.arquillian-cube>
     <version.awaitility>4.0.1</version.awaitility>
     <version.fabric8-maven-plugin>4.2.0</version.fabric8-maven-plugin>
-    <version.fabric8-openshift-client>4.4.2</version.fabric8-openshift-client>
+    <version.fabric8-openshift-client>4.5.0</version.fabric8-openshift-client>
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
     <version.maven-war-plugin>3.2.3</version.maven-war-plugin>
     <version.restassured>4.1.1</version.restassured>
