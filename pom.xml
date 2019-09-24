@@ -184,14 +184,6 @@
               </execution>
             </executions>
             <configuration>
-              <generator>
-                <includes>
-                  <include>thorntail-v2</include>
-                </includes>
-                <excludes>
-                  <exclude>webapp</exclude>
-                </excludes>
-              </generator>
               <enricher>
                 <config>
                   <thorntail-v2-health-check>
