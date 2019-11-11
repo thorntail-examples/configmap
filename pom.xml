@@ -42,6 +42,7 @@
     <version.awaitility>4.0.1</version.awaitility>
     <version.fabric8-maven-plugin>4.3.1</version.fabric8-maven-plugin>
     <version.fabric8-openshift-client>4.6.3</version.fabric8-openshift-client>
+    <version.jackson-dataformat-yaml>2.9.9</version.jackson-dataformat-yaml> <!-- should match Jackson version in Thorntail -->
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
     <version.maven-war-plugin>3.2.3</version.maven-war-plugin>
     <version.restassured>4.1.2</version.restassured>
@@ -66,6 +67,12 @@
         <version>${version.arquillian-cube}</version>
         <scope>import</scope>
         <type>pom</type>
+      </dependency>
+      <!-- Fabric8 OpenShift Client brings in too new Jackson version -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
+        <artifactId>jackson-dataformat-yaml</artifactId>
+        <version>${version.jackson-dataformat-yaml}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
