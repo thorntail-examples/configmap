@@ -39,7 +39,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <version.arquillian-cube>1.18.2</version.arquillian-cube>
-    <version.awaitility>4.0.1</version.awaitility>
+    <version.awaitility>4.0.2</version.awaitility>
     <version.fabric8-maven-plugin>4.3.1</version.fabric8-maven-plugin>
     <version.fabric8-openshift-client>4.6.4</version.fabric8-openshift-client>
     <version.jackson-dataformat-yaml>2.9.9</version.jackson-dataformat-yaml> <!-- should match Jackson version in Thorntail -->
