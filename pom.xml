@@ -100,6 +100,21 @@
       <artifactId>openshift-client</artifactId>
       <version>${version.fabric8-openshift-client}</version>
       <scope>test</scope>
+      <!-- workaround for https://github.com/fabric8io/kubernetes-client/issues/2195 -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.jsonschema2pojo</groupId>
+          <artifactId>jsonschema2pojo-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.sundr</groupId>
+          <artifactId>builder-annotations</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.sundr</groupId>
+          <artifactId>transform-annotations</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>io.rest-assured</groupId>
