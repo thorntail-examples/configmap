@@ -92,6 +92,17 @@
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.10.3</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.9.9</version>
             <licenses>
                 <license>
@@ -257,7 +268,7 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>logging-interceptor</artifactId>
-            <version>3.12.0</version>
+            <version>3.12.12</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -293,12 +304,12 @@
             <version>3.0.7</version>
             <licenses>
                 <license>
-                    <name>GNU General Public License, Version 2 with the Classpath Exception</name>
-                    <url>http://repository.jboss.org/licenses/gpl-2.0-ce.txt</url>
+                    <name>Common Development and Distribution License (CDDL) and GNU Public License v.2 w/Classpath Exception</name>
+                    <url>https://netbeans.org/cddl-gplv2.html</url>
                 </license>
                 <license>
-                    <name>Common Development and Distribution License 1.1</name>
-                    <url>https://javaee.github.io/glassfish/LICENSE</url>
+                    <name>Common Development and Distribution License (CDDL) and GNU Public License v.2 w/Classpath Exception</name>
+                    <url>https://netbeans.org/cddl-gplv2.html</url>
                 </license>
             </licenses>
         </dependency>
@@ -308,12 +319,12 @@
             <version>3.0.7</version>
             <licenses>
                 <license>
-                    <name>GNU General Public License, Version 2 with the Classpath Exception</name>
-                    <url>http://repository.jboss.org/licenses/gpl-2.0-ce.txt</url>
+                    <name>Common Development and Distribution License (CDDL) and GNU Public License v.2 w/Classpath Exception</name>
+                    <url>https://netbeans.org/cddl-gplv2.html</url>
                 </license>
                 <license>
-                    <name>Common Development and Distribution License 1.1</name>
-                    <url>https://javaee.github.io/glassfish/LICENSE</url>
+                    <name>Common Development and Distribution License (CDDL) and GNU Public License v.2 w/Classpath Exception</name>
+                    <url>https://netbeans.org/cddl-gplv2.html</url>
                 </license>
             </licenses>
         </dependency>
@@ -452,7 +463,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-client</artifactId>
-            <version>4.6.0</version>
+            <version>4.10.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -462,8 +473,63 @@
         </dependency>
         <dependency>
             <groupId>io.fabric8</groupId>
-            <artifactId>kubernetes-model</artifactId>
-            <version>4.6.0</version>
+            <artifactId>kubernetes-model-admissionregistration</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-apiextensions</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-apps</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-autoscaling</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-batch</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-certificates</artifactId>
+            <version>4.10.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -474,7 +540,139 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-common</artifactId>
-            <version>4.6.0</version>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-coordination</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-core</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-discovery</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-events</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-extensions</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-metrics</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-networking</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-policy</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-rbac</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-scheduling</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-settings</artifactId>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-storageclass</artifactId>
+            <version>4.10.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -496,7 +694,18 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>openshift-client</artifactId>
-            <version>4.6.0</version>
+            <version>4.10.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>openshift-model</artifactId>
+            <version>4.10.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -540,7 +749,7 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-path</artifactId>
-            <version>4.1.2</version>
+            <version>4.3.0</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -551,7 +760,7 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>4.1.2</version>
+            <version>4.3.0</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -562,7 +771,7 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured-common</artifactId>
-            <version>4.1.2</version>
+            <version>4.3.0</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -573,7 +782,7 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>xml-path</artifactId>
-            <version>4.1.2</version>
+            <version>4.3.0</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1022,6 +1231,28 @@
             </licenses>
         </dependency>
         <dependency>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
+            <version>1.2.1</version>
+            <licenses>
+                <license>
+                    <name>Eclipse Distribution License, Version 1.0</name>
+                    <url>http://repository.jboss.org/licenses/edl-1.0.txt</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.2</version>
+            <licenses>
+                <license>
+                    <name>Eclipse Distribution License, Version 1.0</name>
+                    <url>http://repository.jboss.org/licenses/edl-1.0.txt</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
             <version>1.1.1</version>
@@ -1029,17 +1260,6 @@
                 <license>
                     <name>Common Development and Distribution License 1.0</name>
                     <url>http://repository.jboss.org/licenses/cddl.txt</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>javax.activation-api</artifactId>
-            <version>1.2.0</version>
-            <licenses>
-                <license>
-                    <name>Common Development and Distribution License (CDDL) and GNU Public License v.2 w/Classpath Exception</name>
-                    <url>https://netbeans.org/cddl-gplv2.html</url>
                 </license>
             </licenses>
         </dependency>
@@ -1121,21 +1341,6 @@
                 <license>
                     <name>Apache License 2.0</name>
                     <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version>
-            <licenses>
-                <license>
-                    <name>GNU General Public License, Version 2 with the Classpath Exception</name>
-                    <url>http://repository.jboss.org/licenses/gpl-2.0-ce.txt</url>
-                </license>
-                <license>
-                    <name>Common Development and Distribution License 1.1</name>
-                    <url>https://javaee.github.io/glassfish/LICENSE</url>
                 </license>
             </licenses>
         </dependency>
@@ -1637,7 +1842,7 @@
         <dependency>
             <groupId>org.awaitility</groupId>
             <artifactId>awaitility</artifactId>
-            <version>4.0.1</version>
+            <version>4.0.3</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1659,7 +1864,7 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
-            <version>2.5.8</version>
+            <version>3.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1670,7 +1875,7 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-json</artifactId>
-            <version>2.5.8</version>
+            <version>3.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1681,7 +1886,7 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-xml</artifactId>
-            <version>2.5.8</version>
+            <version>3.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1706,12 +1911,12 @@
             <version>1.9.13</version>
             <licenses>
                 <license>
-                    <name>GNU Lesser General Public License v2.1 only</name>
-                    <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
-                </license>
-                <license>
                     <name>Apache License 2.0</name>
                     <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+                <license>
+                    <name>GNU Lesser General Public License v2.1 only</name>
+                    <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
                 </license>
             </licenses>
         </dependency>
@@ -1967,12 +2172,12 @@
             <version>1.0</version>
             <licenses>
                 <license>
-                    <name>Common Development and Distribution License 1.1</name>
-                    <url>https://javaee.github.io/glassfish/LICENSE</url>
+                    <name>Common Development and Distribution License (CDDL) and GNU Public License v.2 w/Classpath Exception</name>
+                    <url>https://netbeans.org/cddl-gplv2.html</url>
                 </license>
                 <license>
-                    <name>GNU General Public License, Version 2 with the Classpath Exception</name>
-                    <url>http://repository.jboss.org/licenses/gpl-2.0-ce.txt</url>
+                    <name>Common Development and Distribution License (CDDL) and GNU Public License v.2 w/Classpath Exception</name>
+                    <url>https://netbeans.org/cddl-gplv2.html</url>
                 </license>
             </licenses>
         </dependency>
@@ -3612,17 +3817,6 @@
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>1.7.26</version>
-            <licenses>
-                <license>
-                    <name>MIT License</name>
-                    <url>https://opensource.org/licenses/MIT/</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.22.jbossorg-1</version>
             <licenses>
@@ -3635,7 +3829,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.26</version>
+            <version>1.7.30</version>
             <licenses>
                 <license>
                     <name>MIT License</name>
