@@ -20,7 +20,7 @@
 
   <groupId>io.thorntail.example</groupId>
   <artifactId>thorntail-configmap</artifactId>
-  <version>17</version>
+  <version>18-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <name>Thorntail - ConfigMap</name>
