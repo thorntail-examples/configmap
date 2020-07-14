@@ -46,7 +46,7 @@
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
     <version.maven-war-plugin>3.3.0</version.maven-war-plugin>
     <version.restassured>4.3.1</version.restassured>
-    <version.resteasy>3.11.2.Final</version.resteasy>
+    <version.resteasy>3.12.1.Final</version.resteasy>
     <version.thorntail>2.7.0.Final</version.thorntail>
 
     <fabric8.generator.from>registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.8</fabric8.generator.from>
