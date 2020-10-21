@@ -8,5 +8,7 @@
     <property name="enableImageStreamDetection">false</property>
     <property name="env.init.enabled">true</property>
     <property name="env.dependencies">file://${basedir}/target/test-classes/test-config.yml</property>
+    <!-- remove env.config.url when ArquillianCube supports JKube -->
+    <property name="env.config.url">file://${basedir}/target/classes/META-INF/jkube/openshift.yml</property>
   </extension>
 </arquillian>

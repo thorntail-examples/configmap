@@ -40,16 +40,16 @@
 
     <version.arquillian-cube>1.18.2</version.arquillian-cube>
     <version.awaitility>4.0.3</version.awaitility>
-    <version.fabric8-maven-plugin>4.4.1</version.fabric8-maven-plugin>
     <version.fabric8-openshift-client>4.12.0</version.fabric8-openshift-client>
     <version.jackson-dataformat-yaml>2.10.3</version.jackson-dataformat-yaml> <!-- should match Jackson version in Thorntail -->
+    <version.jkube>1.0.0</version.jkube>
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
     <version.maven-war-plugin>3.3.1</version.maven-war-plugin>
     <version.restassured>4.3.1</version.restassured>
     <version.resteasy>3.11.2.Final</version.resteasy>
     <version.thorntail>2.7.0.Final</version.thorntail>
 
-    <fabric8.generator.from>registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.8</fabric8.generator.from>
+    <jkube.generator.from>registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.8</jkube.generator.from>
   </properties>
 
   <dependencyManagement>
@@ -179,9 +179,9 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>io.fabric8</groupId>
-            <artifactId>fabric8-maven-plugin</artifactId>
-            <version>${version.fabric8-maven-plugin}</version>
+            <groupId>org.eclipse.jkube</groupId>
+            <artifactId>openshift-maven-plugin</artifactId>
+            <version>${version.jkube}</version>
             <executions>
               <execution>
                 <goals>
