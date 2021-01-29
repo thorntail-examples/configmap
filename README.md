@@ -22,12 +22,12 @@ oc apply -f ./.openshiftio/application.yaml
 oc new-app --template=thorntail-configmap
 ```
 
-### Deployment with the Fabric8 Maven Plugin
+### Deployment with the JKube OpenShift Maven Plugin
 
 ```bash
 oc create configmap app-config --from-file=app-config.yml
 
-mvn clean fabric8:deploy -Popenshift
+mvn clean oc:deploy -Popenshift
 ```
 
 ## Test everything
