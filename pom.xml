@@ -37,16 +37,14 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <version.arquillian-cube>1.18.2</version.arquillian-cube>
-    <version.awaitility>4.0.3</version.awaitility>
     <version.jkube>1.1.0</version.jkube>
     <version.fabric8-openshift-client>5.0.1</version.fabric8-openshift-client>
     <version.jackson-dataformat-yaml>2.10.3</version.jackson-dataformat-yaml> <!-- should match Jackson version in Thorntail -->
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
     <version.maven-war-plugin>3.3.1</version.maven-war-plugin>
-    <version.restassured>4.3.3</version.restassured>
     <version.resteasy>3.11.2.Final</version.resteasy>
     <version.thorntail>2.7.0.Final</version.thorntail>
+    <version.thorntail-openshift-test>1.0.0</version.thorntail-openshift-test>
 
     <jkube.generator.from>registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.8</jkube.generator.from>
   </properties>
@@ -59,13 +57,6 @@
         <version>${version.thorntail}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.arquillian.cube</groupId>
-        <artifactId>arquillian-cube-bom</artifactId>
-        <version>${version.arquillian-cube}</version>
-        <scope>import</scope>
-        <type>pom</type>
       </dependency>
       <!-- Fabric8 OpenShift Client brings in too new Jackson version -->
       <dependency>
@@ -95,37 +86,14 @@
     </dependency>
 
     <dependency>
-      <groupId>io.fabric8</groupId>
-      <artifactId>openshift-client</artifactId>
-      <version>${version.fabric8-openshift-client}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <version>${version.restassured}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>io.thorntail</groupId>
       <artifactId>arquillian</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.arquillian.cube</groupId>
-      <artifactId>arquillian-cube-openshift</artifactId>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>io.undertow</groupId>
-          <artifactId>undertow-core</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.awaitility</groupId>
-      <artifactId>awaitility</artifactId>
-      <version>${version.awaitility}</version>
+      <groupId>io.thorntail.openshift-test</groupId>
+      <artifactId>thorntail-openshift-test</artifactId>
+      <version>${version.thorntail-openshift-test}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -154,12 +122,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${version.maven-surefire-plugin}</version>
-        <configuration>
-          <classpathDependencyExcludes>
-            <classpathDependencyExclude>org.arquillian.cube:arquillian-cube-openshift</classpathDependencyExclude>
-            <classpathDependencyExclude>org.arquillian.cube:arquillian-cube-kubernetes</classpathDependencyExclude>
-          </classpathDependencyExcludes>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -211,11 +173,6 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
             <version>${version.maven-surefire-plugin}</version>
-            <configuration>
-              <systemPropertyVariables>
-                <app.name>${project.artifactId}</app.name>
-              </systemPropertyVariables>
-            </configuration>
             <executions>
               <execution>
                 <goals>
