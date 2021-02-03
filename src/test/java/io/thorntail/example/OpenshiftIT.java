@@ -16,65 +16,66 @@
 package io.thorntail.example;
 
 import io.fabric8.kubernetes.api.model.ConfigMap;
-import io.fabric8.kubernetes.api.model.Pod;
-import io.fabric8.kubernetes.client.internal.readiness.Readiness;
 import io.fabric8.openshift.client.OpenShiftClient;
-import io.restassured.response.Response;
-import org.arquillian.cube.kubernetes.api.Session;
-import org.arquillian.cube.openshift.impl.enricher.AwaitRoute;
-import org.arquillian.cube.openshift.impl.enricher.RouteURL;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.test.api.ArquillianResource;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
+import io.restassured.RestAssured;
+import io.thorntail.openshift.test.AdditionalResources;
+import io.thorntail.openshift.test.AppMetadata;
+import io.thorntail.openshift.test.OpenShiftTest;
+import io.thorntail.openshift.test.injection.TestResource;
+import io.thorntail.openshift.test.util.OpenShiftUtil;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.List;
+import java.io.File;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static org.awaitility.Awaitility.await;
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RunWith(Arquillian.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@OpenShiftTest
+@AdditionalResources("classpath:test-config.yml")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class OpenshiftIT {
-    private static final String APP_NAME = System.getProperty("app.name");
-
     private static final String CONFIGMAP_NAME = "app-config";
 
-    @ArquillianResource
+    @TestResource
     private OpenShiftClient oc;
 
-    @ArquillianResource
-    private Session session;
+    @TestResource
+    private OpenShiftUtil openshift;
 
-    @RouteURL("${app.name}")
-    @AwaitRoute
-    private URL baseUrl;
+    @TestResource
+    private AppMetadata appMetadata;
 
-    @RouteURL(value = "${app.name}", path = "/api/greeting")
-    private String url;
+    @BeforeAll
+    public static void setUp() {
+        RestAssured.basePath = "/api/greeting";
+    }
 
     @Test
-    public void _01_configMapExists() {
-        Optional<ConfigMap> configMap = findConfigMap();
+    @Order(1)
+    public void configMapExists() {
+        Optional<ConfigMap> configMap = oc.configMaps()
+                .list()
+                .getItems()
+                .stream()
+                .filter(m -> CONFIGMAP_NAME.equals(m.getMetadata().getName()))
+                .findAny();
+
         assertTrue(configMap.isPresent());
     }
 
     @Test
-    public void _02_defaultGreeting() {
-        given()
-                .baseUri(url)
-        .when()
+    @Order(2)
+    public void defaultGreeting() {
+        when()
                 .get()
         .then()
                 .statusCode(200)
@@ -82,11 +83,11 @@ public class OpenshiftIT {
     }
 
     @Test
-    public void _03_customGreeting() {
+    @Order(3)
+    public void customGreeting() {
         given()
-                .baseUri(url)
-        .when()
                 .queryParam("name", "Steve")
+        .when()
                 .get()
         .then()
                 .statusCode(200)
@@ -94,14 +95,13 @@ public class OpenshiftIT {
     }
 
     @Test
-    public void _04_updateConfigGreeting() throws Exception {
-        deployConfigMap("target/test-classes/test-config-update.yml");
+    @Order(4)
+    public void updateConfigGreeting() throws Exception {
+        openshift.applyYaml(new File("target/test-classes/test-config-update.yml"));
 
-        rolloutChanges();
+        openshift.rolloutChanges(appMetadata.name, true);
 
-        given()
-                .baseUri(url)
-        .when()
+        when()
                 .get()
         .then()
                 .statusCode(200)
@@ -109,80 +109,17 @@ public class OpenshiftIT {
     }
 
     @Test
-    public void _05_missingConfigurationSource() throws Exception {
-        deployConfigMap("target/test-classes/test-config-broken.yml");
+    @Order(5)
+    public void missingConfigurationSource() throws Exception {
+        openshift.applyYaml(new File("target/test-classes/test-config-broken.yml"));
 
-        rolloutChanges();
+        openshift.rolloutChanges(appMetadata.name, false);
 
         await().atMost(5, TimeUnit.MINUTES).untilAsserted(() -> {
-            given()
-                    .baseUri(url)
-            .when()
+            when()
                     .get()
             .then()
                     .statusCode(500);
-        });
-    }
-
-    private Optional<ConfigMap> findConfigMap() {
-        List<ConfigMap> configMaps = oc.configMaps()
-                .inNamespace(session.getNamespace())
-                .list()
-                .getItems();
-
-        return configMaps.stream()
-                .filter(m -> CONFIGMAP_NAME.equals(m.getMetadata().getName()))
-                .findAny();
-    }
-
-    private void deployConfigMap(String path) throws IOException {
-        try (InputStream yaml = new FileInputStream(path)) {
-            // in this test, this always replaces an existing configmap, which is already tracked for deleting
-            // after the test finishes, so we don't have to care about deleting it
-            oc.load(yaml).createOrReplace();
-        }
-    }
-
-    private void rolloutChanges() {
-        System.out.println("Rollout changes to " + APP_NAME);
-
-        // in reality, user would do `oc rollout latest`, but that's hard (racy) to wait for
-        // so here, we'll scale down to 0, wait for that, then scale back to 1 and wait again
-        scale(APP_NAME, 0);
-        scale(APP_NAME, 1);
-
-        await().atMost(5, TimeUnit.MINUTES).until(() -> {
-            try {
-                Response response = get(baseUrl);
-                return response.getStatusCode() == 200;
-            } catch (Exception e) {
-                return false;
-            }
-        });
-    }
-
-    private void scale(String name, int replicas) {
-        oc.deploymentConfigs()
-                .inNamespace(session.getNamespace())
-                .withName(name)
-                .scale(replicas);
-
-        await().atMost(5, TimeUnit.MINUTES).until(() -> {
-            // ideally, we'd look at deployment config's status.availableReplicas field,
-            // but that's only available since OpenShift 3.5
-            List<Pod> pods = oc
-                    .pods()
-                    .inNamespace(session.getNamespace())
-                    .withLabel("deploymentconfig", name)
-                    .list()
-                    .getItems();
-            try {
-                return pods.size() == replicas && pods.stream().allMatch(Readiness::isPodReady);
-            } catch (IllegalStateException e) {
-                // the 'Ready' condition can be missing sometimes, in which case Readiness.isPodReady throws an exception
-                // here, we'll swallow that exception in hope that the 'Ready' condition will appear later
-                return false;
-            }
         });
     }
 }
