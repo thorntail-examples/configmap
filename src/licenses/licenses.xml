@@ -101,6 +101,17 @@
             </licenses>
         </dependency>
         <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.11.2</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-base</artifactId>
             <version>2.10.3</version>
@@ -233,17 +244,6 @@
             </licenses>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
             <groupId>com.jcraft</groupId>
             <artifactId>jsch</artifactId>
             <version>0.1.54</version>
@@ -279,7 +279,7 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>3.8.0</version>
+            <version>3.12.12</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -290,7 +290,7 @@
         <dependency>
             <groupId>com.squareup.okio</groupId>
             <artifactId>okio</artifactId>
-            <version>1.13.0</version>
+            <version>1.15.0</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -452,7 +452,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-client</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -463,7 +463,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-admissionregistration</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -474,7 +474,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-apiextensions</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -485,7 +485,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-apps</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -496,7 +496,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-autoscaling</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -507,7 +507,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-batch</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -518,7 +518,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-certificates</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -529,7 +529,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-common</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -540,7 +540,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-coordination</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -551,7 +551,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-core</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -562,7 +562,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-discovery</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -573,7 +573,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-events</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -584,7 +584,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-extensions</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -595,7 +595,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-metrics</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -606,7 +606,18 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-networking</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-node</artifactId>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -617,7 +628,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-policy</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -628,7 +639,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-rbac</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -639,7 +650,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-scheduling</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -650,7 +661,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-settings</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -661,18 +672,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-storageclass</artifactId>
-            <version>4.10.3</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>io.fabric8</groupId>
-            <artifactId>kubernetes-openshift-uberjar</artifactId>
-            <version>4.0.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -683,7 +683,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>openshift-client</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -694,7 +694,51 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>openshift-model</artifactId>
-            <version>4.10.3</version>
+            <version>5.0.1</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>openshift-model-console</artifactId>
+            <version>5.0.1</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>openshift-model-monitoring</artifactId>
+            <version>5.0.1</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>openshift-model-operator</artifactId>
+            <version>5.0.1</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>openshift-model-operatorhub</artifactId>
+            <version>5.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -710,17 +754,6 @@
                 <license>
                     <name>Apache License 2.0</name>
                     <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>io.github.lukehutch</groupId>
-            <artifactId>fast-classpath-scanner</artifactId>
-            <version>2.9.3</version>
-            <licenses>
-                <license>
-                    <name>MIT License</name>
-                    <url>https://opensource.org/licenses/MIT/</url>
                 </license>
             </licenses>
         </dependency>
@@ -749,7 +782,7 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-path</artifactId>
-            <version>4.3.1</version>
+            <version>4.3.3</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -760,7 +793,7 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>4.3.1</version>
+            <version>4.3.3</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -771,7 +804,7 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured-common</artifactId>
-            <version>4.3.1</version>
+            <version>4.3.3</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -782,7 +815,7 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>xml-path</artifactId>
-            <version>4.3.1</version>
+            <version>4.3.3</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1209,6 +1242,17 @@
             </licenses>
         </dependency>
         <dependency>
+            <groupId>io.thorntail.openshift-test</groupId>
+            <artifactId>thorntail-openshift-test</artifactId>
+            <version>1.2.0</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
             <groupId>io.undertow</groupId>
             <artifactId>undertow-core</artifactId>
             <version>2.1.3.Final</version>
@@ -1338,50 +1382,6 @@
             </licenses>
         </dependency>
         <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>jsr250-api</artifactId>
-            <version>1.0</version>
-            <licenses>
-                <license>
-                    <name>Common Development and Distribution License 1.0</name>
-                    <url>http://repository.jboss.org/licenses/cddl.txt</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>1.0</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>2.9.7</version>
@@ -1455,19 +1455,8 @@
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
-            <artifactId>commons-compress</artifactId>
-            <version>1.5</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <version>3.11</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1489,7 +1478,7 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.3</version>
+            <version>4.5.10</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1510,8 +1499,8 @@
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient-osgi</artifactId>
-            <version>4.3.3</version>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.12</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1523,17 +1512,6 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
             <version>4.4.5</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.4.6</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1652,17 +1630,6 @@
             </licenses>
         </dependency>
         <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-invoker</artifactId>
-            <version>3.0.0</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
             <groupId>org.apache.maven.wagon</groupId>
             <artifactId>wagon-file</artifactId>
             <version>2.6</version>
@@ -1740,9 +1707,9 @@
             </licenses>
         </dependency>
         <dependency>
-            <groupId>org.arquillian.cube</groupId>
-            <artifactId>arquillian-cube-api</artifactId>
-            <version>1.18.2</version>
+            <groupId>org.apiguardian</groupId>
+            <artifactId>apiguardian-api</artifactId>
+            <version>1.1.0</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1751,123 +1718,13 @@
             </licenses>
         </dependency>
         <dependency>
-            <groupId>org.arquillian.cube</groupId>
-            <artifactId>arquillian-cube-core</artifactId>
-            <version>1.18.2</version>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.19.0</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
                     <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.arquillian.cube</groupId>
-            <artifactId>arquillian-cube-kubernetes</artifactId>
-            <version>1.18.2</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.arquillian.cube</groupId>
-            <artifactId>arquillian-cube-openshift</artifactId>
-            <version>1.18.2</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.arquillian.cube</groupId>
-            <artifactId>arquillian-cube-openshift-api</artifactId>
-            <version>1.18.2</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.arquillian.cube</groupId>
-            <artifactId>arquillian-cube-requirement-spi</artifactId>
-            <version>1.18.2</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.arquillian.cube</groupId>
-            <artifactId>arquillian-cube-spi</artifactId>
-            <version>1.18.2</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.arquillian.cube</groupId>
-            <artifactId>fabric8-maven-plugin-build</artifactId>
-            <version>1.18.2</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.arquillian.reporter</groupId>
-            <artifactId>arquillian-core-reporter-api</artifactId>
-            <version>0.0.3</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.arquillian.reporter</groupId>
-            <artifactId>arquillian-reporter-api</artifactId>
-            <version>0.0.3</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.arquillian.spacelift</groupId>
-            <artifactId>arquillian-spacelift</artifactId>
-            <version>1.0.2</version>
-            <licenses>
-                <license>
-                    <name>Public Domain</name>
-                    <url>http://repository.jboss.org/licenses/cc0-1.0.txt</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.arquillian.spacelift</groupId>
-            <artifactId>arquillian-spacelift-api</artifactId>
-            <version>1.0.2</version>
-            <licenses>
-                <license>
-                    <name>Public Domain</name>
-                    <url>http://repository.jboss.org/licenses/cc0-1.0.txt</url>
                 </license>
             </licenses>
         </dependency>
@@ -1896,7 +1753,7 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
-            <version>3.0.3</version>
+            <version>3.0.7</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1907,7 +1764,7 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-json</artifactId>
-            <version>3.0.3</version>
+            <version>3.0.7</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1918,7 +1775,7 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-xml</artifactId>
-            <version>3.0.3</version>
+            <version>3.0.7</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1963,39 +1820,6 @@
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-xc</artifactId>
             <version>1.9.13.redhat-00006</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-compiler-api</artifactId>
-            <version>2.3</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-compiler-javac</artifactId>
-            <version>2.3</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-component-annotations</artifactId>
-            <version>1.7</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -2147,31 +1971,9 @@
             </licenses>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.sisu</groupId>
-            <artifactId>org.eclipse.sisu.inject</artifactId>
-            <version>0.3.0.M1</version>
-            <licenses>
-                <license>
-                    <name>Eclipse Public License, Version 1.0</name>
-                    <url>http://repository.jboss.org/licenses/epl-1.0.txt</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.sisu</groupId>
-            <artifactId>org.eclipse.sisu.plexus</artifactId>
-            <version>0.3.0.M1</version>
-            <licenses>
-                <license>
-                    <name>Eclipse Public License, Version 1.0</name>
-                    <url>http://repository.jboss.org/licenses/epl-1.0.txt</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
             <groupId>org.fusesource.jansi</groupId>
             <artifactId>jansi</artifactId>
-            <version>1.11</version>
+            <version>2.2.0</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -2357,25 +2159,6 @@
             </licenses>
         </dependency>
         <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.18.1-GA</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-                <license>
-                    <name>GNU Lesser General Public License v2.1 only</name>
-                    <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</url>
-                </license>
-                <license>
-                    <name>Mozilla Public License 1.1</name>
-                    <url>https://www.mozilla.org/en-US/MPL/1.1/</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
             <groupId>org.jboss</groupId>
             <artifactId>jandex</artifactId>
             <version>2.1.2.Final</version>
@@ -2383,17 +2166,6 @@
                 <license>
                     <name>Apache License 2.0</name>
                     <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss</groupId>
-            <artifactId>jboss-dmr</artifactId>
-            <version>1.2.0.Final</version>
-            <licenses>
-                <license>
-                    <name>Public Domain</name>
-                    <url>http://repository.jboss.org/licenses/cc0-1.0.txt</url>
                 </license>
             </licenses>
         </dependency>
@@ -3154,63 +2926,8 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-api-maven-archive</artifactId>
-            <version>2.2.7</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-api-maven-embedded</artifactId>
-            <version>3.0.1</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-depchain</artifactId>
-            <version>2.2.7</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
             <version>2.2.7</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-impl-maven-archive</artifactId>
-            <version>2.2.7</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-impl-maven-embedded</artifactId>
-            <version>3.0.1</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -3232,17 +2949,6 @@
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-spi-maven</artifactId>
-            <version>2.2.7</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-spi-maven-archive</artifactId>
             <version>2.2.7</version>
             <licenses>
                 <license>
@@ -3679,17 +3385,6 @@
             </licenses>
         </dependency>
         <dependency>
-            <groupId>org.jolokia</groupId>
-            <artifactId>jolokia-client-java</artifactId>
-            <version>1.3.4</version>
-            <licenses>
-                <license>
-                    <name>Apache License 2.0</name>
-                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.7.2</version>
@@ -3712,13 +3407,90 @@
             </licenses>
         </dependency>
         <dependency>
-            <groupId>org.kohsuke.metainf-services</groupId>
-            <artifactId>metainf-services</artifactId>
-            <version>1.6</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.7.1</version>
             <licenses>
                 <license>
-                    <name>MIT License</name>
-                    <url>https://opensource.org/licenses/MIT/</url>
+                    <name>Eclipse Public License - v 2.0</name>
+                    <url>http://www.eclipse.org/legal/epl-v20.html</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.1</version>
+            <licenses>
+                <license>
+                    <name>Eclipse Public License - v 2.0</name>
+                    <url>http://www.eclipse.org/legal/epl-v20.html</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.7.1</version>
+            <licenses>
+                <license>
+                    <name>Eclipse Public License - v 2.0</name>
+                    <url>http://www.eclipse.org/legal/epl-v20.html</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.7.1</version>
+            <licenses>
+                <license>
+                    <name>Eclipse Public License - v 2.0</name>
+                    <url>http://www.eclipse.org/legal/epl-v20.html</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+            <version>1.7.1</version>
+            <licenses>
+                <license>
+                    <name>Eclipse Public License - v 2.0</name>
+                    <url>http://www.eclipse.org/legal/epl-v20.html</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-engine</artifactId>
+            <version>1.7.1</version>
+            <licenses>
+                <license>
+                    <name>Eclipse Public License - v 2.0</name>
+                    <url>http://www.eclipse.org/legal/epl-v20.html</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.7.1</version>
+            <licenses>
+                <license>
+                    <name>Eclipse Public License - v 2.0</name>
+                    <url>http://www.eclipse.org/legal/epl-v20.html</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>org.opentest4j</groupId>
+            <artifactId>opentest4j</artifactId>
+            <version>1.2.0</version>
+            <licenses>
+                <license>
+                    <name>Apache License 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0</url>
                 </license>
             </licenses>
         </dependency>
@@ -3884,16 +3656,6 @@
                 <license>
                     <name>Apache License 2.0</name>
                     <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-                </license>
-            </licenses>
-        </dependency>
-        <dependency>
-            <groupId>org.tukaani</groupId>
-            <artifactId>xz</artifactId>
-            <version>1.2</version>
-            <licenses>
-                <license>
-                    <name>Public Domain</name>
                 </license>
             </licenses>
         </dependency>
