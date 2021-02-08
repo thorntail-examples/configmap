@@ -19,7 +19,7 @@
 
   <groupId>io.thorntail.example</groupId>
   <artifactId>thorntail-configmap</artifactId>
-  <version>19-SNAPSHOT</version>
+  <version>19</version>
   <packaging>war</packaging>
 
   <name>Thorntail - ConfigMap</name>
