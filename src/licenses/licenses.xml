@@ -452,7 +452,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-client</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -463,7 +463,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-admissionregistration</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -474,7 +474,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-apiextensions</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -485,7 +485,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-apps</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -496,7 +496,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-autoscaling</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -507,7 +507,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-batch</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -518,7 +518,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-certificates</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -529,7 +529,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-common</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -540,7 +540,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-coordination</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -551,7 +551,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-core</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -562,7 +562,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-discovery</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -573,7 +573,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-events</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -584,7 +584,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-extensions</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -595,7 +595,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-metrics</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -606,7 +606,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-networking</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -617,7 +617,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-node</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -628,7 +628,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-policy</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -639,7 +639,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-rbac</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -650,7 +650,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-scheduling</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -661,7 +661,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-settings</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -672,7 +672,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-storageclass</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -683,7 +683,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>openshift-client</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -694,7 +694,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>openshift-model</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -705,7 +705,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>openshift-model-console</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -716,7 +716,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>openshift-model-monitoring</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -727,7 +727,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>openshift-model-operator</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -738,7 +738,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>openshift-model-operatorhub</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>
@@ -1244,7 +1244,7 @@
         <dependency>
             <groupId>io.thorntail.openshift-test</groupId>
             <artifactId>thorntail-openshift-test</artifactId>
-            <version>1.2.0</version>
+            <version>1.3.0</version>
             <licenses>
                 <license>
                     <name>Apache License 2.0</name>

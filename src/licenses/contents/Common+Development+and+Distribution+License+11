@@ -35,7 +35,7 @@
         <section id="main-content">
           <h2 id="common-development-and-distribution-license-cddl-version-11">COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.1</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Definitions.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Definitions.
  
   1.1. "Contributor" means each individual or entity that creates or
   contributes to the creation of Modifications.
@@ -389,7 +389,7 @@
 
 <h2 id="notice-pursuant-to-section-9-of-the-common-development-and-distribution-license-cddl">NOTICE PURSUANT TO SECTION 9 OF THE COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The code released under the CDDL shall be governed by the laws of the
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The code released under the CDDL shall be governed by the laws of the
 State of California (excluding conflict-of-law provisions). Any
 litigation relating to this License shall be subject to the jurisdiction
 of the Federal Courts of the Northern District of California and the
@@ -401,7 +401,7 @@ County, California.
 
 <h2 id="the-gnu-general-public-license-gpl-version-2-june-1991">The GNU General Public License (GPL) Version 2, June 1991</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Copyright (C) 1989, 1991 Free Software Foundation, Inc.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Copyright (C) 1989, 1991 Free Software Foundation, Inc.
 51 Franklin Street, Fifth Floor
 Boston, MA 02110-1335
 USA
@@ -739,7 +739,7 @@ General Public License instead of this License.
 
 <hr />
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Certain source files distributed by Oracle America, Inc. and/or its
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Certain source files distributed by Oracle America, Inc. and/or its
 affiliates are subject to the following clarification and special
 exception to the GPLv2, based on the GNU Project exception for its
 Classpath libraries, known as the GNU Classpath Exception, but only
