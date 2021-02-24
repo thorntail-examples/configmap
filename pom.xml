@@ -37,7 +37,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <version.jkube>1.1.0</version.jkube>
+    <version.jkube>1.1.1</version.jkube>
     <version.fabric8-openshift-client>5.0.1</version.fabric8-openshift-client>
     <version.jackson-dataformat-yaml>2.10.3</version.jackson-dataformat-yaml> <!-- should match Jackson version in Thorntail -->
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
